@@ -6,11 +6,17 @@ type Props = {
   email: string;
   password: string;
   onChange(key: string, value: string): void;
+  onSubmit(e: React.FormEvent): void;
 };
 
-const LoginForm: React.FC<Props> = ({ email, password, onChange }) => {
+const LoginForm: React.FC<Props> = ({
+  email,
+  password,
+  onChange,
+  onSubmit,
+}) => {
   return (
-    <form>
+    <form onSubmit={(e) => onSubmit(e)}>
       <FormInput
         value={email}
         placeholder={"Adres email"}

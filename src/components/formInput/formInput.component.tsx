@@ -1,5 +1,4 @@
 import React from "react";
-import "./formInput.styles.scss";
 
 type Props = {
   type: string;

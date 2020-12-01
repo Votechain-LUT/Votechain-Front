@@ -13,6 +13,7 @@
     label{
       margin-bottom:20px;
       text-align: center;
+      font-weight:700;
     }
     input{
       margin-bottom:20px;
@@ -33,8 +34,11 @@
   .loginInfo{
     display: flex;
     flex-flow:column wrap;
-    padding-top:80px;
+    padding-top:50px;
     padding-left:40px;
+    @media(max-width:680px){
+      padding:20px;
+    }
     .headerTitle{
       text-align: left;
     }
@@ -50,12 +54,19 @@
   .wrapper{
     margin: 0 auto;
     display:flex;
+    @media(max-width:1200px){
+      flex-wrap:wrap;
+      justify-content: center;
+    }
   }
 
   .formContainer{
     min-width:450px;
     background-color:#fff;
     padding:20px;
+    @media(max-width:680px){
+      min-width:330px;
+    }
   }
 
   .appButton{

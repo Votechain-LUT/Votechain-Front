@@ -1,43 +1,23 @@
 import React, { useState } from "react";
 import "./login.styles.scss";
-import FormInput from "../../components/formInput/formInput.component";
-import Button from "../../components/button/button.component";
+import LoginForm from "../../components/loginForm/loginForm.component";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const onChange = (key: string, value: string) => {
+    key === "email" ? setEmail(value) : setPassword(value);
+  };
+
   return (
     <section className={"loginPage"}>
       <div className={"wrapper"}>
         <div className={"formContainer"}>
-          <span className={"headerTitle"}>Masz już konto ?</span>
-          <form>
-            <FormInput
-              value={email}
-              placeholder={"Adres email"}
-              onChange={(e) => setEmail(e.target.value)}
-              label={"Adres email"}
-              type={"text"}
-            />
-            <FormInput
-              value={password}
-              placeholder={"Hasło"}
-              onChange={(e) => setPassword(e.target.value)}
-              label={"Hasło"}
-              type={"password"}
-            />
-            <Button value={"Zaloguj się"} />
-          </form>
-          <div className={"flexColumn mt20"}>
-            <span className={"headerTitle"}>Chcę założyć konto</span>
-            <Button value={"Załóż konto"} />
-          </div>
+          <LoginForm email={email} password={password} onChange={onChange} />
         </div>
         <div className={"loginInfo"}>
-          <span className={"headerTitle"}>
-            Załóż konto w systemie Votechain:
-          </span>
+          <span className={"headerTitle"}>System Votechain:</span>
           <ul>
             <li>organizacja głosowań</li>
             <li>

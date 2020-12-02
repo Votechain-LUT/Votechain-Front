@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import "./login.styles.scss";
 import LoginForm from "../../components/loginForm/loginForm.component";
 import { validateEmail } from "../../services/login.service";
@@ -7,6 +8,7 @@ import { toast } from "react-toastify";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const onChange = (key: string, value: string) => {
     key === "email" ? setEmail(value) : setPassword(value);
@@ -23,6 +25,11 @@ const LoginPage = () => {
     if (password.length < 5) {
       toast.error("Hasło musi zawierać przynajmniej 5 znaków");
       return;
+    }
+    if (email === "admin@admin.pl" && password === "admin") {
+      history.push("/admin");
+    } else {
+      toast.error("Nieprawidłowy login i/lub hasło.");
     }
   };
 

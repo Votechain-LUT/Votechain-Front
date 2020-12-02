@@ -37,3 +37,31 @@ body{
     margin-top:20px;
   }
 }
+
+.topSection{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:10px;
+  @media(min-width:1200px){
+    justify-content: flex-end;
+  }
+}
+.logout{
+  text-align: right;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.sidebarIcon{
+  max-width:40px;
+  cursor:pointer;
+  @media(min-width:1200px){
+    display: none;
+  }
+}
+
+.hidden{
+  display: none;
+}

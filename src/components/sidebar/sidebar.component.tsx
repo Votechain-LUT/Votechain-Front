@@ -1,7 +1,7 @@
 import React from "react";
 import "./sidebar.styles.scss";
 
-export const Sidebar = () => {
+export const Sidebar: React.FC = () => {
   return (
     <section className={"sidebar"}>
       <div className={"sidebarHeader"}>

@@ -3,7 +3,7 @@ import { Sidebar } from "../../../components/sidebar/sidebar.component";
 import { AdminTable } from "../../../components/adminTable/adminTable.component";
 import "./dashboard.styles.scss";
 
-const AdminDashboard = () => {
+const AdminDashboard: React.FC = () => {
   return (
     <section className={"adminDashboard"}>
       <Sidebar />

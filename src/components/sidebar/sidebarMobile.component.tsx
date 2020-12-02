@@ -3,7 +3,7 @@ import cancelIcon from "../../assets/cancel.png";
 import { useDispatch } from "react-redux";
 import { AppDispatcher } from "../../redux/app/app.dispatcher";
 
-export const SidebarMobile = () => {
+export const SidebarMobile: React.FC = () => {
   const dispatch = useDispatch();
   const appDispatcher = new AppDispatcher(dispatch);
   return (

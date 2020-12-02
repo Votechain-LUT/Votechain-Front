@@ -9,7 +9,13 @@ type Props = {
   props?: string[];
 };
 
-const FormInput = ({ type, value, label, onChange, ...props }: Props) => {
+const FormInput: React.FC<Props> = ({
+  type,
+  value,
+  label,
+  onChange,
+  ...props
+}) => {
   return (
     <div className={"formInput"}>
       {label && <label>{label}</label>}

@@ -14,7 +14,7 @@ type AppProps = {
   };
 };
 
-const App = () => {
+const App: React.FC = () => {
   const dispatch = useDispatch();
   const appDispatcher = new AppDispatcher(dispatch);
   const { showSidebar } = useSelector((state: AppProps) => {

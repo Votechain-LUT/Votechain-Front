@@ -7,7 +7,7 @@ import AdminDashboard from "../../pages/admin/dashboard/dashboard.component";
 import { ToastContainer } from "react-toastify";
 import App from "../../App";
 
-export const Wrapper = () => {
+export const Wrapper: React.FC = () => {
   return (
     <div>
       <Provider store={store}>

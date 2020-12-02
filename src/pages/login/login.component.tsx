@@ -5,7 +5,7 @@ import LoginForm from "../../components/loginForm/loginForm.component";
 import { validateEmail } from "../../services/login.service";
 import { toast } from "react-toastify";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();

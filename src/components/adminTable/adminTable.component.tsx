@@ -1,7 +1,7 @@
 import React from "react";
 import "./adminTable.styles.scss";
 
-export const AdminTable = () => {
+export const AdminTable: React.FC = () => {
   return (
     <div className={"adminTableWrapper"}>
       <span className={"title"}>Trwające głosowania</span>

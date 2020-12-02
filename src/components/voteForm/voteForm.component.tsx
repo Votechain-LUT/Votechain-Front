@@ -1,5 +1,5 @@
 import React from "react";
 
-export const voteForm = () => {
+export const voteForm: React.FC = () => {
   return <form></form>;
 };

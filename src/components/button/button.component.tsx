@@ -7,7 +7,7 @@ type Props = {
   props?: string[];
 };
 
-const Button = ({ className, value, ...props }: Props) => {
+const Button: React.FC<Props> = ({ className, value, ...props }) => {
   return (
     <button className={`appButton ${className}`} {...props}>
       {value}

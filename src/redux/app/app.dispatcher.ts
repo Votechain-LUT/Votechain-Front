@@ -8,5 +8,6 @@ export class AppDispatcher {
   constructor(dispatch: Dispatch<AppActions>) {
     this.dispatch = dispatch;
   }
-  toggleSidebar = () => this.dispatch({ type: AppActionTypes.TOGGLE_SIDEBAR });
+  toggleSidebar = (): void =>
+    this.dispatch({ type: AppActionTypes.TOGGLE_SIDEBAR });
 }

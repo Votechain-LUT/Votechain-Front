@@ -10,6 +10,6 @@ script:
   - docker run -e CI=true votechain/front yarn test
 
 after_success:
-  - docker build -t votechain/front
+  - docker build -t votechain/front .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push votechain/front

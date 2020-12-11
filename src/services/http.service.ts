@@ -5,12 +5,16 @@ class Http {
   private http;
   constructor() {
     this.http = axios.create({
-      baseURL: "http://localhost:4000",
+      baseURL: "http://localhost:8000/core",
     });
   }
 
   private signIn(requestBody: LoginRequest) {
     return this.http.post("/signIn", requestBody);
+  }
+
+  private getOngoingPolls() {
+    return this.http.get("/polls?ongoing=true");
   }
 }
 

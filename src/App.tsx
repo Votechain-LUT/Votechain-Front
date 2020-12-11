@@ -22,8 +22,9 @@ const App: React.FC = () => {
       showSidebar: state.app.showSidebar,
     };
   });
+
   return (
-    <div>
+    <div className={"appWrapper"}>
       <div className={"topSection"}>
         <img
           onClick={() => appDispatcher.toggleSidebar()}

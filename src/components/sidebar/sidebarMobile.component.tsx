@@ -2,8 +2,13 @@ import React from "react";
 import cancelIcon from "../../assets/cancel.png";
 import { useDispatch } from "react-redux";
 import { AppDispatcher } from "../../redux/app/app.dispatcher";
+import { Link } from "react-router-dom";
 
-export const SidebarMobile: React.FC = () => {
+type Props = {
+  sidebarField: string;
+};
+
+export const SidebarMobile: React.FC<Props> = ({ sidebarField }) => {
   const dispatch = useDispatch();
   const appDispatcher = new AppDispatcher(dispatch);
   return (
@@ -20,10 +25,18 @@ export const SidebarMobile: React.FC = () => {
         </div>
         <div>
           <ul>
-            <li>Dodaj nowe głosowanie</li>
-            <li>Trwające głosowania</li>
-            <li>Nadchodzące głosowania</li>
-            <li>Zakończone głosowania</li>
+            <li className={sidebarField === "newPoll" ? "active" : ""}>
+              <Link to={"/admin/newPoll"}>Dodaj nowe głosowanie</Link>
+            </li>
+            <li className={sidebarField === "onGoingPolls" ? "active" : ""}>
+              <Link to={"/admin/onGoingPolls"}>Trwajace głosowania</Link>
+            </li>
+            <li className={sidebarField === "futurePolls" ? "active" : ""}>
+              <Link to={"/admin/futurePolls"}>Nadchodzące głosowania</Link>
+            </li>
+            <li className={sidebarField === "endedPolls" ? "active" : ""}>
+              <Link to={"/admin/endedPolls"}>Zakończone głosowania</Link>
+            </li>
           </ul>
         </div>
       </div>

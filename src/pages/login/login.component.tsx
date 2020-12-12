@@ -2,34 +2,34 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import "./login.styles.scss";
 import LoginForm from "../../components/loginForm/loginForm.component";
-import { validateEmail } from "../../services/login.service";
 import { toast } from "react-toastify";
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
   const onChange = (key: string, value: string) => {
-    key === "email" ? setEmail(value) : setPassword(value);
+    key === "username" ? setUsername(value) : setPassword(value);
   };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setEmail("");
+    setUsername("");
     setPassword("");
-    if (!validateEmail(email)) {
-      toast.error("Nieprawidłowy adres email.");
+    if (username.length < 3) {
+      toast.error("Nazwa użytkownika musi zawierać przynajmniej 3 znaki");
       return;
     }
+
     if (password.length < 5) {
       toast.error("Hasło musi zawierać przynajmniej 5 znaków");
       return;
     }
-    if (email === "admin@admin.pl" && password === "admin") {
-      history.push("/admin");
+    if (username === "admin" && password === "admin") {
+      history.push("/admin/onGoingPolls");
     } else {
-      toast.error("Nieprawidłowy login i/lub hasło.");
+      toast.error("Nieprawidłowa nazwa użytkownika i/lub hasło.");
     }
   };
 
@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
       <div className={"wrapper"}>
         <div className={"formContainer"}>
           <LoginForm
-            email={email}
+            username={username}
             password={password}
             onChange={onChange}
             onSubmit={onSubmit}

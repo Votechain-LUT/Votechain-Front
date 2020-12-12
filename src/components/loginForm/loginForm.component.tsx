@@ -3,14 +3,14 @@ import FormInput from "../formInput/formInput.component";
 import Button from "../button/button.component";
 
 type Props = {
-  email: string;
+  username: string;
   password: string;
   onChange(key: string, value: string): void;
   onSubmit(e: React.FormEvent): void;
 };
 
 const LoginForm: React.FC<Props> = ({
-  email,
+  username,
   password,
   onChange,
   onSubmit,
@@ -18,10 +18,10 @@ const LoginForm: React.FC<Props> = ({
   return (
     <form onSubmit={(e) => onSubmit(e)}>
       <FormInput
-        value={email}
-        placeholder={"Adres email"}
-        onChange={(e) => onChange("email", e.target.value)}
-        label={"Adres email"}
+        value={username}
+        placeholder={"Nazwa użytkownika"}
+        onChange={(e) => onChange("username", e.target.value)}
+        label={"Nazwa użytkownika"}
         type={"text"}
       />
       <FormInput

@@ -9,12 +9,12 @@ class Http {
     });
   }
 
-  private signIn(requestBody: LoginRequest) {
-    return this.http.post("/signIn", requestBody);
+  public signIn(requestBody: LoginRequest) {
+    return this.http.post("/auth/token/", requestBody);
   }
 
-  private getOngoingPolls() {
-    return this.http.get("/polls?ongoing=true");
+  public getOngoingPolls() {
+    return this.http.get("/poll/");
   }
 }
 

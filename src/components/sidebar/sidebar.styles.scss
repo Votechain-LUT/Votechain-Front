@@ -5,13 +5,15 @@
     color:#5d89f2;
     padding:10px;
     border-radius: 5px 5px 0 0;
+    margin-bottom:10px;
   }
   @media(max-width:1200px){
     display:none;
   }
   ul{
     list-style: none;
-    li{
+    li > a{
+      display: block;
       padding:15px 10px;
       cursor: pointer;
       transition: .3s ease;
@@ -26,6 +28,10 @@
         }
       }
     }
+  }
+  .active{
+    color:#5d89f2;
+    background-color: #dbf3fb;
   }
 }
 

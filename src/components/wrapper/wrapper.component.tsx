@@ -20,7 +20,7 @@ export const Wrapper: React.FC = () => {
             <Route path={"/admin/futurePolls"} component={AdminDashboard} />
             <Route path={"/admin/futurePolls"} component={AdminDashboard} />
             <Route path={"/admin/endedPolls"} component={AdminDashboard} />
-            <Route path={"/admin/createPoll"} component={AdminDashboard} />
+            <Route path={"/admin/newPoll"} component={AdminDashboard} />
             <Route path={"*"} component={NotFoundPage} />
           </Switch>
         </Router>

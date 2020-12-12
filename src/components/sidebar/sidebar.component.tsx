@@ -1,7 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./sidebar.styles.scss";
 
-export const Sidebar: React.FC = () => {
+type Props = {
+  sidebarField: string;
+};
+
+export const Sidebar: React.FC<Props> = ({ sidebarField }) => {
   return (
     <section className={"sidebar"}>
       <div className={"sidebarHeader"}>
@@ -9,10 +14,18 @@ export const Sidebar: React.FC = () => {
       </div>
       <div>
         <ul>
-          <li>Dodaj nowe głosowanie</li>
-          <li>Trwające głosowania</li>
-          <li>Nadchodzące głosowania</li>
-          <li>Zakończone głosowania</li>
+          <li className={sidebarField === "newPoll" ? "active" : ""}>
+            <Link to={"/admin/newPoll"}>Dodaj nowe głosowanie</Link>
+          </li>
+          <li className={sidebarField === "onGoingPolls" ? "active" : ""}>
+            <Link to={"/admin/onGoingPolls"}>Trwajace głosowania</Link>
+          </li>
+          <li className={sidebarField === "futurePolls" ? "active" : ""}>
+            <Link to={"/admin/futurePolls"}>Nadchodzące głosowania</Link>
+          </li>
+          <li className={sidebarField === "endedPolls" ? "active" : ""}>
+            <Link to={"/admin/endedPolls"}>Zakończone głosowania</Link>
+          </li>
         </ul>
       </div>
     </section>

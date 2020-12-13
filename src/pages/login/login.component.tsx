@@ -1,13 +1,22 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router";
+import React, { useEffect, useState } from "react";
 import "./login.styles.scss";
 import LoginForm from "../../components/loginForm/loginForm.component";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/root.reducer";
+import { useHistory } from "react-router";
+import { fetchToken } from "../../redux/user.slice";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const token = useSelector((state: RootState) => state.user.token);
   const history = useHistory();
+
+  useEffect(() => {
+    if (token) history.push("/admin/onGoingPolls");
+  }, [token]);
 
   const onChange = (key: string, value: string) => {
     key === "username" ? setUsername(value) : setPassword(value);
@@ -26,11 +35,11 @@ const LoginPage: React.FC = () => {
       toast.error("Hasło musi zawierać przynajmniej 5 znaków");
       return;
     }
-    if (username === "admin" && password === "admin") {
-      history.push("/admin/onGoingPolls");
-    } else {
-      toast.error("Nieprawidłowa nazwa użytkownika i/lub hasło.");
-    }
+    const requestBody = {
+      username: username,
+      password: password,
+    };
+    dispatch(fetchToken(requestBody));
   };
 
   return (

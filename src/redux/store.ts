@@ -1,7 +1,10 @@
-import { createStore } from "redux";
-import rootReducer from "./root.reducer";
-import { devToolsEnhancer } from "redux-devtools-extension";
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import rootReducer, { RootState } from "./root.reducer";
 
-const store = createStore(rootReducer, devToolsEnhancer({}));
+const store = configureStore({
+  reducer: rootReducer,
+});
 
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
 export default store;

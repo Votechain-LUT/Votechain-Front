@@ -1,8 +1,8 @@
 import React from "react";
 import cancelIcon from "../../assets/cancel.png";
 import { useDispatch } from "react-redux";
-import { AppDispatcher } from "../../redux/app/app.dispatcher";
 import { Link } from "react-router-dom";
+import { toggleSidebar } from "../../redux/app.slice";
 
 type Props = {
   sidebarField: string;
@@ -10,7 +10,7 @@ type Props = {
 
 export const SidebarMobile: React.FC<Props> = ({ sidebarField }) => {
   const dispatch = useDispatch();
-  const appDispatcher = new AppDispatcher(dispatch);
+
   return (
     <section className={"sidebarMobile"}>
       <div>
@@ -20,7 +20,7 @@ export const SidebarMobile: React.FC<Props> = ({ sidebarField }) => {
             src={cancelIcon}
             alt={"cancelIcon"}
             role={"presentation"}
-            onClick={() => appDispatcher.toggleSidebar()}
+            onClick={() => dispatch(toggleSidebar())}
           />
         </div>
         <div>

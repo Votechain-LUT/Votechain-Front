@@ -7,6 +7,7 @@ import AdminDashboard from "../../pages/admin/dashboard/dashboard.component";
 import { ToastContainer } from "react-toastify";
 import App from "../../App";
 import NotFoundPage from "../../pages/notFound/notFound.component";
+import PrivateRoute from "../privateRoute/privateRoute.component";
 
 export const Wrapper: React.FC = () => {
   return (
@@ -16,11 +17,23 @@ export const Wrapper: React.FC = () => {
           <App />
           <Switch>
             <Route exact path={"/"} component={LoginPage} />
-            <Route path={"/admin/onGoingPolls"} component={AdminDashboard} />
-            <Route path={"/admin/futurePolls"} component={AdminDashboard} />
-            <Route path={"/admin/futurePolls"} component={AdminDashboard} />
-            <Route path={"/admin/endedPolls"} component={AdminDashboard} />
-            <Route path={"/admin/newPoll"} component={AdminDashboard} />
+            <PrivateRoute
+              path={"/admin/onGoingPolls"}
+              component={AdminDashboard}
+            />
+            <PrivateRoute
+              path={"/admin/futurePolls"}
+              component={AdminDashboard}
+            />
+            <PrivateRoute
+              path={"/admin/futurePolls"}
+              component={AdminDashboard}
+            />
+            <PrivateRoute
+              path={"/admin/endedPolls"}
+              component={AdminDashboard}
+            />
+            <PrivateRoute path={"/admin/newPoll"} component={AdminDashboard} />
             <Route path={"*"} component={NotFoundPage} />
           </Switch>
         </Router>

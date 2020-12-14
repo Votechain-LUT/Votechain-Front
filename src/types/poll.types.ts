@@ -9,3 +9,10 @@ export type Poll = {
   end: Date;
   isActive: boolean;
 };
+
+export type CreatePoll = {
+  title:string;
+  start?:Date;
+  end:Date;
+  isActive?:boolean
+}

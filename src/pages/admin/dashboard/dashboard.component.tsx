@@ -7,35 +7,37 @@ import { Poll } from "../../../types/poll.types";
 import Http from "../../../services/http.service";
 
 const AdminDashboard: React.FC = () => {
-  const [pollType, setPollType] = useState("");
+  const [sidebarField, setSidebarField] = useState("");
   const [polls, setPolls] = useState<Poll[]>([]);
   const location = useLocation();
 
   useEffect(() => {
     const http = new Http();
-    const pollType = location.pathname.split("/")[2];
-    setPollType(pollType);
+    const sidebarField = location.pathname.split("/")[2];
+    setSidebarField(sidebarField);
     let json = null;
     const fetchPolls = async () => {
-      switch (pollType) {
+      switch (sidebarField) {
         case "onGoingPolls":
           json = await http.getOngoingPolls();
           break;
         case "futurePolls":
-          json = await http.getOngoingPolls();
+          json = await http.getFuturePolls();
+          break;
+        case "endedPolls":
+          json = await http.getEndedPolls();
           break;
         default:
           json = null;
       }
-      console.log(json);
+      if (json) setPolls(json.data);
     };
     fetchPolls();
   }, [location]);
-
   return (
     <section className={"adminDashboard"}>
-      <Sidebar sidebarField={pollType} />
-      <AdminTable />
+      <Sidebar sidebarField={sidebarField} />
+      <AdminTable sidebarField={sidebarField} polls={polls} />
     </section>
   );
 };

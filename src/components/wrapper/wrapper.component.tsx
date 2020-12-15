@@ -33,7 +33,15 @@ export const Wrapper: React.FC = () => {
               path={"/admin/endedPolls"}
               component={AdminDashboard}
             />
+            <PrivateRoute
+              path={"/admin/createdPolls"}
+              component={AdminDashboard}
+            />
             <PrivateRoute path={"/admin/newPoll"} component={AdminDashboard} />
+            <PrivateRoute
+              path={"/admin/newCandidate"}
+              component={AdminDashboard}
+            />
             <Route path={"*"} component={NotFoundPage} />
           </Switch>
         </Router>

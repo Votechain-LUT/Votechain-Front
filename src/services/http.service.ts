@@ -1,8 +1,8 @@
 import axios from "axios";
 import { LoginRequest } from "../types/login.types";
 import store from "../redux/store";
-import {CreatePoll} from "../types/poll.types";
-import {Candidate} from "../types/candidate.types";
+import { CreatePoll } from "../types/poll.types";
+import { Candidate } from "../types/candidate.types";
 
 class Http {
   private http;
@@ -27,56 +27,55 @@ class Http {
     return this.http.get("/poll?ongoing=true");
   }
 
-  public getFuturePolls(){
+  public getFuturePolls() {
     this.setHeaders();
     return this.http.get("/poll?future=true");
   }
 
-  public getEnded(){
+  public getEndedPolls() {
     this.setHeaders();
     return this.http.get("/poll?ended=true");
   }
 
-  public createPoll(requestBody: CreatePoll){
+  public createPoll(requestBody: CreatePoll) {
     this.setHeaders();
     return this.http.post("/poll", requestBody);
   }
 
-  public getPoll(id: number){
+  public getPoll(id: number) {
     this.setHeaders();
     return this.http.get(`/poll/${id}`);
   }
 
-  public updatePoll(id: number, requestBody: CreatePoll){
+  public updatePoll(id: number, requestBody: CreatePoll) {
     this.setHeaders();
     return this.http.put(`/poll/${id}`, requestBody);
   }
 
-  public startPoll(id:number){
+  public startPoll(id: number) {
     this.setHeaders();
     return this.http.post(`/poll/${id}/start`);
   }
 
-  public getCandidateList(id:number){
+  public getCandidateList(id: number) {
     this.setHeaders();
     return this.http.get(`/poll/${id}/candidate`);
   }
 
-  public addCandidateToPoll(id:number, requestBody: Candidate){
+  public addCandidateToPoll(id: number, requestBody: Candidate) {
     this.setHeaders();
     return this.http.post(`/poll/${id}/candidate`);
   }
 
-  public getCandidate(pollId: number, candidateId:number){
+  public getCandidate(pollId: number, candidateId: number) {
     this.setHeaders();
     return this.http.get(`/poll/${pollId}/candidate/${candidateId}`);
   }
 
-  public deleteCandidate(pollId: number, candidateId: number){
+  public deleteCandidate(pollId: number, candidateId: number) {
     this.setHeaders();
     return this.http.delete(`/poll/${pollId}/candidate/${candidateId}`);
   }
-
 }
 
 export default Http;

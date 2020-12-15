@@ -11,8 +11,8 @@ export type Poll = {
 };
 
 export type CreatePoll = {
-  title:string;
-  start?:Date;
-  end:Date;
-  isActive?:boolean
-}
+  title: string;
+  start?: Date;
+  end: Date;
+  isActive?: boolean;
+};

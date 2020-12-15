@@ -1,34 +1,43 @@
 import React from "react";
 import "./adminTable.styles.scss";
+import { Poll } from "../../types/poll.types";
+import { getPageName, parseDate } from "../../helpers";
 
-export const AdminTable: React.FC = () => {
+type Props = {
+  polls: Poll[];
+  sidebarField: string;
+};
+
+export const AdminTable: React.FC<Props> = ({ polls, sidebarField }) => {
   return (
     <div className={"adminTableWrapper"}>
-      <span className={"title"}>Trwające głosowania</span>
-      {/*<span>Brak obecnie trwających głosowań</span>*/}
-      <div className={"wrapper"}>
-        <table>
-          <thead>
-            <tr>
-              <th>Nazwa</th>
-              <th>Data rozpoczęcia</th>
-              <th>Data zakończenia</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Wybory prezydenckie</td>
-              <td>2020-10-02</td>
-              <td>2020-10-05</td>
-            </tr>
-            <tr>
-              <td>Wybory prezydenckie</td>
-              <td>2020-10-02</td>
-              <td>2020-10-05</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <span className={"title"}>{getPageName(sidebarField)}</span>
+      {polls.length ? (
+        <div className={"wrapper"}>
+          <table>
+            <thead>
+              <tr>
+                <th>Nazwa</th>
+                <th>Data rozpoczęcia</th>
+                <th>Data zakończenia</th>
+              </tr>
+            </thead>
+            <tbody>
+              {polls.map((poll) => {
+                return (
+                  <tr key={poll.id}>
+                    <td>{poll.title}</td>
+                    <td>{parseDate(poll.start)}</td>
+                    <td>{parseDate(poll.end)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <span>Nie znaleziono żadnych głosowań</span>
+      )}
     </div>
   );
 };

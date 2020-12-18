@@ -20,6 +20,7 @@ export const AdminTable: React.FC<Props> = ({ polls, sidebarField }) => {
                 <th>Nazwa</th>
                 <th>Data rozpoczęcia</th>
                 <th>Data zakończenia</th>
+                <th>Liczba kandydatów</th>
               </tr>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@ export const AdminTable: React.FC<Props> = ({ polls, sidebarField }) => {
                     <td>{poll.title}</td>
                     <td>{parseDate(poll.start)}</td>
                     <td>{parseDate(poll.end)}</td>
+                    <td>{poll.candidates.length}</td>
                   </tr>
                 );
               })}

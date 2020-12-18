@@ -8,6 +8,8 @@ import { ToastContainer } from "react-toastify";
 import App from "../../App";
 import NotFoundPage from "../../pages/notFound/notFound.component";
 import PrivateRoute from "../privateRoute/privateRoute.component";
+import NewCandidatePage from "../../pages/admin/newCandidate/newCandidate.component";
+import NewPollPage from "../../pages/admin/newPoll/newPoll.component";
 
 export const Wrapper: React.FC = () => {
   return (
@@ -26,10 +28,6 @@ export const Wrapper: React.FC = () => {
               component={AdminDashboard}
             />
             <PrivateRoute
-              path={"/admin/futurePolls"}
-              component={AdminDashboard}
-            />
-            <PrivateRoute
               path={"/admin/endedPolls"}
               component={AdminDashboard}
             />
@@ -37,10 +35,10 @@ export const Wrapper: React.FC = () => {
               path={"/admin/createdPolls"}
               component={AdminDashboard}
             />
-            <PrivateRoute path={"/admin/newPoll"} component={AdminDashboard} />
+            <PrivateRoute path={"/admin/newPoll"} component={NewPollPage} />
             <PrivateRoute
               path={"/admin/newCandidate"}
-              component={AdminDashboard}
+              component={NewCandidatePage}
             />
             <Route path={"*"} component={NotFoundPage} />
           </Switch>

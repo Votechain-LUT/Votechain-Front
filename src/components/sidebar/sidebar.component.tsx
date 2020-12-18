@@ -18,7 +18,7 @@ export const Sidebar: React.FC<Props> = ({ sidebarField }) => {
             <li className={sidebarField === "newPoll" ? "active" : ""}>
               <Link to={"/admin/newPoll"}>Dodaj nowe głosowanie</Link>
             </li>
-            <li className={sidebarField === "createdPoll" ? "active" : ""}>
+            <li className={sidebarField === "createdPolls" ? "active" : ""}>
               <Link to={"/admin/createdPolls"}>Utworzone głosowania</Link>
             </li>
             <li className={sidebarField === "onGoingPolls" ? "active" : ""}>

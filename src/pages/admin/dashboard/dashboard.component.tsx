@@ -27,6 +27,9 @@ const AdminDashboard: React.FC = () => {
         case "endedPolls":
           json = await http.getEndedPolls();
           break;
+        case "createdPolls":
+          json = await http.getFutureCreatedPolls();
+          break;
         default:
           json = null;
       }

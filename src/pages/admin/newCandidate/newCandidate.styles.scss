@@ -1,0 +1,39 @@
+.newCandidatePage{
+  display:flex;
+  padding:20px 60px;
+
+  .wrapper{
+    padding:0 20px;
+  }
+
+  .title{
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  form{
+    border-radius:5px;
+    display:flex;
+    flex-flow:column wrap;
+  }
+  .formInput{
+    display:flex;
+    flex-flow:column wrap;
+    label{
+      margin-bottom:20px;
+      font-weight:700;
+    }
+    input{
+      margin-bottom:20px;
+      padding:10px;
+      border:none;
+      border-bottom:1px solid #c3c3c3;
+      &:focus{
+        outline:0;
+      }
+    }
+  }
+
+}

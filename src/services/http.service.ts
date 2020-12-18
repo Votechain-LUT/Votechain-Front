@@ -37,6 +37,11 @@ class Http {
     return this.http.get("/poll?ended=true");
   }
 
+  public getFutureCreatedPolls() {
+    this.setHeaders();
+    return this.http.get("/poll?future=true&active=false");
+  }
+
   public createPoll(requestBody: CreatePoll) {
     this.setHeaders();
     return this.http.post("/poll", requestBody);
@@ -64,7 +69,7 @@ class Http {
 
   public addCandidateToPoll(id: number, requestBody: Candidate) {
     this.setHeaders();
-    return this.http.post(`/poll/${id}/candidate`);
+    return this.http.post(`/poll/${id}/candidate`, requestBody);
   }
 
   public getCandidate(pollId: number, candidateId: number) {

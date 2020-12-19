@@ -12,6 +12,11 @@
   }
   ul{
     list-style: none;
+    li:last-child{
+      &:last-child{
+        margin-bottom:10px;
+      }
+    }
     li > a{
       display: block;
       padding:15px 10px;

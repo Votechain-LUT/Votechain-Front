@@ -3,13 +3,14 @@ import { Provider } from "react-redux";
 import store from "../../redux/store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "../../pages/login/login.component";
-import AdminDashboard from "../../pages/admin/dashboard/dashboard.component";
-import { ToastContainer } from "react-toastify";
-import App from "../../App";
 import NotFoundPage from "../../pages/notFound/notFound.component";
+import NewCandidatePage from "../../pages/admin/candidate/new/newCandidate.component";
+import NewPollPage from "../../pages/admin/poll/new/newPoll.component";
+import PollPage from "../../pages/admin/poll/show/poll.component";
+import AdminDashboard from "../../pages/admin/dashboard/dashboard.component";
+import App from "../../App";
 import PrivateRoute from "../privateRoute/privateRoute.component";
-import NewCandidatePage from "../../pages/admin/newCandidate/newCandidate.component";
-import NewPollPage from "../../pages/admin/newPoll/newPoll.component";
+import { ToastContainer } from "react-toastify";
 
 export const Wrapper: React.FC = () => {
   return (
@@ -40,6 +41,7 @@ export const Wrapper: React.FC = () => {
               path={"/admin/newCandidate"}
               component={NewCandidatePage}
             />
+            <PrivateRoute path={"/admin/poll/:pollId"} component={PollPage} />
             <Route path={"*"} component={NotFoundPage} />
           </Switch>
         </Router>

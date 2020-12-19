@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./newCandidate.styles.scss";
-import CandidateForm from "../../../components/candidateForm/candidateForm.component";
-import { Sidebar } from "../../../components/sidebar/sidebar.component";
+import CandidateForm from "../../../../components/candidateForm/candidateForm.component";
+import { Sidebar } from "../../../../components/sidebar/sidebar.component";
 import { toast } from "react-toastify";
-import Http from "../../../services/http.service";
-import { Poll } from "../../../types/poll.types";
+import Http from "../../../../services/http.service";
+import { Poll } from "../../../../types/poll.types";
 import { useHistory } from "react-router";
 
 const NewCandidatePage = () => {

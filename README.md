@@ -13,3 +13,9 @@
 
 **LINTING**
 1. To fix your code run `yarn run lint:fix` in project root directory
+
+**TODO**
+1. Add tests
+2. Refactor stylesheets
+3. Fix linter warnings
+4. Add relative paths to important components

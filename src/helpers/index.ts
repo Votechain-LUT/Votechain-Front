@@ -26,3 +26,18 @@ export const getPageName = (sidebarField: string): string => {
       return "";
   }
 };
+
+export const getPollStatus = (url: string): string => {
+  switch (url) {
+    case "onGoingPolls":
+      return "w trakcie";
+    case "futurePolls":
+      return "nadchodzące";
+    case "endedPolls":
+      return "zakończone";
+    case "createdPolls":
+      return "utworzone";
+    default:
+      return "";
+  }
+};

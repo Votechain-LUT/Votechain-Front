@@ -2,6 +2,7 @@ import React from "react";
 import "./adminTable.styles.scss";
 import { Poll } from "../../types/poll.types";
 import { getPageName, parseDate } from "../../helpers";
+import { useHistory } from "react-router";
 
 type Props = {
   polls: Poll[];
@@ -9,6 +10,8 @@ type Props = {
 };
 
 export const AdminTable: React.FC<Props> = ({ polls, sidebarField }) => {
+  const history = useHistory();
+
   return (
     <div className={"adminTableWrapper"}>
       <span className={"title"}>{getPageName(sidebarField)}</span>
@@ -26,7 +29,16 @@ export const AdminTable: React.FC<Props> = ({ polls, sidebarField }) => {
             <tbody>
               {polls.map((poll) => {
                 return (
-                  <tr key={poll.id}>
+                  <tr
+                    role={"presentation"}
+                    onClick={() =>
+                      history.push({
+                        pathname: `/admin/poll/${poll.id}`,
+                        state: { pollType: sidebarField },
+                      })
+                    }
+                    key={poll.id}
+                  >
                     <td>{poll.title}</td>
                     <td>{parseDate(poll.start)}</td>
                     <td>{parseDate(poll.end)}</td>

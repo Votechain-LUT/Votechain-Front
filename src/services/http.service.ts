@@ -39,7 +39,7 @@ class Http {
 
   public getFutureCreatedPolls() {
     this.setHeaders();
-    return this.http.get("/poll?future=true&active=false");
+    return this.http.get("/poll?future=true&active=true");
   }
 
   public createPoll(requestBody: CreatePoll) {

@@ -43,6 +43,12 @@ a{
   }
 }
 
+.mb{
+  &20{
+    margin-bottom:20px;
+  }
+}
+
 .topSection{
   display:flex;
   justify-content: space-between;

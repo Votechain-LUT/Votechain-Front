@@ -4,10 +4,6 @@ export const validateEmail = (email: string): boolean => {
   return re.test(String(email).toLowerCase());
 };
 
-export const parseDate = (date: Date): string => {
-  return date.toString().replace("T", " ").replace("Z", "");
-};
-
 export const getPageName = (sidebarField: string): string => {
   switch (sidebarField) {
     case "onGoingPolls":

@@ -33,4 +33,19 @@
     overflow: auto;
     white-space: nowrap;
   }
+  .actionsWrapper{
+    display: flex;
+    max-width:unset;
+  }
+  .iconContainer{
+    display: flex;
+    align-items: center;
+    &:first-child{
+      margin-right:20px;
+    }
+    img{
+      max-width:15px;
+      margin-right:10px;
+    }
+  }
 }

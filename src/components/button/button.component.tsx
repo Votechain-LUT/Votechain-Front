@@ -4,12 +4,15 @@ import "./button.styles.scss";
 type Props = {
   value: string;
   className?: string;
-  props?: string[];
+  handleClick?: () => void;
 };
 
-const Button: React.FC<Props> = ({ className, value, ...props }) => {
+const Button: React.FC<Props> = ({ className, value, handleClick }) => {
   return (
-    <button className={`appButton ${className}`} {...props}>
+    <button
+      onClick={() => (handleClick ? handleClick() : null)}
+      className={`appButton ${className}`}
+    >
       {value}
     </button>
   );

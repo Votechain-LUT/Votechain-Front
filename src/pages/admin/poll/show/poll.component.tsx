@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router";
 import { Sidebar } from "../../../../components/sidebar/sidebar.component";
 import Http from "../../../../services/http.service";
 import { Poll } from "../../../../types/poll.types";
-import { getPollStatus, parseDate } from "../../../../helpers";
+import { getPollStatus } from "../../../../helpers";
 import Button from "../../../../components/button/button.component";
 import { Location } from "history";
 
@@ -48,8 +48,8 @@ const PollPage: React.FC<Props> = ({ location }) => {
         <div className={"wrapper"}>
           <span className={"title"}>{poll.title}</span>
           <div className={"infoBox"}>
-            <div>Data rozpoczęcia głosowania: {parseDate(poll.start)}</div>
-            <div>Data zakończenia głosowania: {parseDate(poll.end)}</div>
+            <div>Data rozpoczęcia głosowania: {poll.start}</div>
+            <div>Data zakończenia głosowania: {poll.end}</div>
             <div>Status głosowania: {getPollStatus(pollStatus)}</div>
           </div>
           <table>

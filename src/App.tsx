@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import appLogo from "./assets/appLogo.png";
 import menuLogo from "./assets/menu.png";
 import "./App.styles.scss";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +9,7 @@ import { useLocation } from "react-router";
 import { RootState } from "./redux/root.reducer";
 import { toggleSidebar } from "./redux/app.slice";
 import { logout } from "./redux/user.slice";
+import appLogo from "./assets/appLogo.png";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();

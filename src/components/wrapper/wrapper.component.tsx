@@ -46,6 +46,7 @@ export const Wrapper: React.FC = () => {
           </Switch>
         </Router>
         <ToastContainer />
+        <div id={"overlay"} />
       </Provider>
     </div>
   );

@@ -11,6 +11,10 @@ import AdminDashboard from "../../pages/admin/dashboard/dashboard.component";
 import App from "../../App";
 import PrivateRoute from "../privateRoute/privateRoute.component";
 import { ToastContainer } from "react-toastify";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale } from "react-datepicker";
+import pl from "date-fns/locale/pl";
+registerLocale("pl", pl);
 
 export const Wrapper: React.FC = () => {
   return (

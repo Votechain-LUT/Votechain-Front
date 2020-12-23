@@ -37,3 +37,11 @@ export const getPollStatus = (url: string): string => {
       return "";
   }
 };
+
+export const formatDate = (date: Date): string => {
+  const dateArray = date.toLocaleString("pl-pl").split(",");
+  const yearMonthDay = dateArray[0];
+  return yearMonthDay
+    .replaceAll(".", "-")
+    .concat(`${dateArray[1].replace("PM", "")}`);
+};

@@ -1,0 +1,13 @@
+.dateTimePickerWrapper{
+  display: flex;
+  flex-flow:column wrap;
+  margin-top:10px;
+  label{
+    margin-bottom:10px;
+    font-weight: 700;
+  }
+  input{
+    padding:5px 10px;
+    cursor:pointer;
+  }
+}

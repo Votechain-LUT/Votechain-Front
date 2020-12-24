@@ -3,7 +3,7 @@ import "./newPoll.styles.scss";
 import { Sidebar } from "../../../../components/sidebar/sidebar.component";
 import PollForm from "../../../../components/pollForm/pollForm.component";
 
-const NewPollPage = () => {
+const NewPollPage: React.FC = () => {
   return (
     <section className={"newPollPage"}>
       <Sidebar sidebarField={"newPoll"} />

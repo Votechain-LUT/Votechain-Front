@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./notFound.styles.scss";
 
-const NotFoundPage = () => {
+const NotFoundPage: React.FC = () => {
   useEffect(() => {
     const appWrapper = document.querySelector(".appWrapper");
     appWrapper?.classList.add("hidden");

@@ -4,10 +4,10 @@ import CandidateForm from "../../../../components/candidateForm/candidateForm.co
 import { Sidebar } from "../../../../components/sidebar/sidebar.component";
 import { toast } from "react-toastify";
 import Http from "../../../../services/http.service";
-import { Poll } from "../../../../types/poll.types";
+import { Poll } from "../../../../types";
 import { useHistory } from "react-router";
 
-const NewCandidatePage = () => {
+const NewCandidatePage: React.FC = () => {
   const [name, setName] = useState("");
   const [selectedPollId, selectPoll] = useState<number | undefined>();
   const [polls, setPolls] = useState<Poll[]>([]);

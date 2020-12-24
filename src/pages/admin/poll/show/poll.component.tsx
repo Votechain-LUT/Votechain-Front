@@ -3,7 +3,7 @@ import "./poll.styles.scss";
 import { useHistory, useParams } from "react-router";
 import { Sidebar } from "../../../../components/sidebar/sidebar.component";
 import Http from "../../../../services/http.service";
-import { Poll } from "../../../../types/poll.types";
+import { Poll } from "../../../../types";
 import { getPollStatus } from "../../../../helpers";
 import Button from "../../../../components/button/button.component";
 import { Location } from "history";
@@ -40,7 +40,7 @@ const PollPage: React.FC<Props> = ({ location }) => {
       setPollStatus(location.state.pollType);
     };
     fetchPoll();
-  }, []);
+  }, [history, location.state.pollType, pollId]);
   return (
     <section className={"pollPage"}>
       <Sidebar sidebarField={""} />
@@ -60,14 +60,15 @@ const PollPage: React.FC<Props> = ({ location }) => {
               </tr>
             </thead>
             <tbody>
-              {poll.candidates.map((candidate, key) => {
-                return (
-                  <tr key={key}>
-                    <td>{candidate.name}</td>
-                    <td>0</td>
-                  </tr>
-                );
-              })}
+              {poll.candidates &&
+                poll.candidates.map((candidate, key) => {
+                  return (
+                    <tr key={key}>
+                      <td>{candidate.name}</td>
+                      <td>0</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
           {pollStatus === "onGoingPolls" && (

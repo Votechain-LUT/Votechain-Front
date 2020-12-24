@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./adminTable.styles.scss";
-import { Poll } from "../../types/poll.types";
+import { Poll } from "../../types";
 import { getPageName } from "../../helpers";
 import { useHistory } from "react-router";
 import editIcon from "../../assets/edit.png";
@@ -59,7 +59,7 @@ export const AdminTable: React.FC<Props> = ({ polls, sidebarField }) => {
                     </td>
                     <td>{poll.start}</td>
                     <td>{poll.end}</td>
-                    <td>{poll.candidates.length}</td>
+                    <td>{poll.candidates && poll.candidates.length}</td>
                     <td className={"actionsWrapper"}>
                       <div
                         role={"presentation"}

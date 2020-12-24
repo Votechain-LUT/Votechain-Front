@@ -3,7 +3,7 @@ import "./editPoll.styles.scss";
 import { Sidebar } from "../../../../components/sidebar/sidebar.component";
 import PollForm from "../../../../components/pollForm/pollForm.component";
 
-const EditPollPage = () => {
+const EditPollPage: React.FC = () => {
   return (
     <section className={"editPollPage"}>
       <Sidebar sidebarField={""} />

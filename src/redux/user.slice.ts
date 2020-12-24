@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LoginRequest } from "../types/login.types";
+import { LoginRequest } from "../types";
 import { AppThunk } from "./store";
 import Http from "../services/http.service";
 import { toast } from "react-toastify";

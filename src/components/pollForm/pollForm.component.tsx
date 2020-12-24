@@ -13,7 +13,7 @@ type ParamType = {
   id: string;
 };
 
-const PollForm = () => {
+const PollForm: React.FC = () => {
   const tomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
   const history = useHistory();
   const location = useLocation();
@@ -37,7 +37,7 @@ const PollForm = () => {
       };
       fetchPoll();
     }
-  }, []);
+  }, [isEditPage, params.id]);
 
   const changeStartDate = (date: Date | [Date, Date] | null) => {
     date && !Array.isArray(date) && setStartDate(date);

@@ -3,12 +3,12 @@ import "./candidateForm.styles.scss";
 import FormInput from "../formInput/formInput.component";
 import FormSelect from "../formSelect/formSelect.component";
 import Button from "../button/button.component";
-import { Poll } from "../../types/poll.types";
+import { Poll } from "../../types";
 
 type Props = {
   inputValue: string;
   polls: Poll[];
-  selectPoll: Dispatch<SetStateAction<any>>;
+  selectPoll: Dispatch<SetStateAction<number | undefined>>;
   onSubmit(e: React.FormEvent): void;
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
 };

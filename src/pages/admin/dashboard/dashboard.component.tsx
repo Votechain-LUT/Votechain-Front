@@ -3,8 +3,8 @@ import { Sidebar } from "../../../components/sidebar/sidebar.component";
 import { AdminTable } from "../../../components/adminTable/adminTable.component";
 import "./dashboard.styles.scss";
 import { useLocation } from "react-router";
-import { Poll } from "../../../types/poll.types";
 import Http from "../../../services/http.service";
+import { Poll } from "../../../types";
 
 const AdminDashboard: React.FC = () => {
   const [sidebarField, setSidebarField] = useState("");

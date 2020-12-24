@@ -16,7 +16,7 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (token) history.push("/admin/onGoingPolls");
-  }, [token]);
+  }, [token, history]);
 
   const onChange = (key: string, value: string) => {
     key === "username" ? setUsername(value) : setPassword(value);

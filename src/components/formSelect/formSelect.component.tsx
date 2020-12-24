@@ -6,12 +6,12 @@ import React, {
   useState,
 } from "react";
 import "./formSelect.styles.scss";
-import { Poll } from "../../types/poll.types";
+import { Poll } from "../../types";
 import arrow from "../../assets/arrow.png";
 
 type Props = {
   polls: Poll[];
-  selectPoll: Dispatch<SetStateAction<any>>;
+  selectPoll: Dispatch<SetStateAction<number | undefined>>;
 };
 
 const FormSelect: React.FC<Props> = ({ polls, selectPoll }) => {

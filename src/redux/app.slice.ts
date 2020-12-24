@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk } from "./store";
 
 interface ConfirmModalState {
   isVisible: boolean;
@@ -36,9 +35,11 @@ const app = createSlice({
     toggleConfirmModal(state) {
       const nextState = !state.modalState.isVisible;
       const overlay = document.getElementById("overlay");
-      nextState
-        ? (overlay!.style.display = "block")
-        : (overlay!.style.display = "none");
+      if (overlay) {
+        nextState
+          ? (overlay.style.display = "block")
+          : (overlay.style.display = "none");
+      }
       state.modalState.isVisible = nextState;
     },
     setModal(state, action: PayloadAction<SetModal>) {

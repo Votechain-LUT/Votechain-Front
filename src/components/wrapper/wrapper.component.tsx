@@ -6,6 +6,7 @@ import LoginPage from "../../pages/login/login.component";
 import NotFoundPage from "../../pages/notFound/notFound.component";
 import NewCandidatePage from "../../pages/admin/candidate/new/newCandidate.component";
 import NewPollPage from "../../pages/admin/poll/new/newPoll.component";
+import EditPollPage from "../../pages/admin/poll/edit/editPoll.component";
 import PollPage from "../../pages/admin/poll/show/poll.component";
 import AdminDashboard from "../../pages/admin/dashboard/dashboard.component";
 import App from "../../App";
@@ -41,6 +42,10 @@ export const Wrapper: React.FC = () => {
               component={AdminDashboard}
             />
             <PrivateRoute path={"/admin/newPoll"} component={NewPollPage} />
+            <PrivateRoute
+              path={"/admin/editPoll/:id"}
+              component={EditPollPage}
+            />
             <PrivateRoute
               path={"/admin/newCandidate"}
               component={NewCandidatePage}

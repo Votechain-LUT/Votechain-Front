@@ -61,7 +61,13 @@ export const AdminTable: React.FC<Props> = ({ polls, sidebarField }) => {
                     <td>{poll.end}</td>
                     <td>{poll.candidates.length}</td>
                     <td className={"actionsWrapper"}>
-                      <div className={"iconContainer"}>
+                      <div
+                        role={"presentation"}
+                        onClick={() =>
+                          history.push(`/admin/editPoll/${poll.id}`)
+                        }
+                        className={"iconContainer"}
+                      >
                         <img src={editIcon} alt={"editIcon"} />
                         <span>Edytuj</span>
                       </div>

@@ -45,3 +45,11 @@ export const formatDate = (date: Date): string => {
     .replaceAll(".", "-")
     .concat(`${dateArray[1].replace("PM", "")}`);
 };
+
+export const parseDate = (date: string): Date => {
+  const arr = date.split(" ");
+  const dayMonthYear = arr[0];
+  const dateParts = dayMonthYear.split("-");
+  const dateString = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]} ${arr[1]}`;
+  return new Date(dateString);
+};

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./pollForm.styles.scss";
 import FormInput from "../formInput/formInput.component";
 import DateTimePicker from "../dateTimePicker/dateTimePicker.component";
@@ -6,16 +6,38 @@ import CheckBox from "../checkbox/checkBox.component";
 import Button from "../button/button.component";
 import { toast } from "react-toastify";
 import Http from "../../services/http.service";
-import { useHistory } from "react-router";
-import { formatDate } from "../../helpers";
+import { useHistory, useLocation, useParams } from "react-router";
+import { formatDate, parseDate } from "../../helpers";
+
+type ParamType = {
+  id: string;
+};
 
 const PollForm = () => {
   const tomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
   const history = useHistory();
+  const location = useLocation();
+  const params = useParams<ParamType>();
+  const isEditPage = location.pathname.includes("edit");
   const [title, setTitle] = useState("");
   const [isActive, setActive] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(tomorrowDate);
+
+  useEffect(() => {
+    if (isEditPage) {
+      const fetchPoll = async () => {
+        const http = new Http();
+        const pollId = params.id;
+        const json = await http.getPoll(parseInt(pollId));
+        setTitle(json.data.title);
+        setStartDate(new Date(parseDate(json.data.start)));
+        setEndDate(new Date(parseDate(json.data.end)));
+        setActive(json.data.isActive);
+      };
+      fetchPoll();
+    }
+  }, []);
 
   const changeStartDate = (date: Date | [Date, Date] | null) => {
     date && !Array.isArray(date) && setStartDate(date);
@@ -47,8 +69,13 @@ const PollForm = () => {
     };
 
     try {
-      await http.createPoll(requestBody);
-      toast.success("Udało się utworzyć głosowania");
+      if (isEditPage) {
+        await http.updatePoll(parseInt(params.id), requestBody);
+        toast.success("Udało się zaktualizować głosowanie");
+      } else {
+        await http.createPoll(requestBody);
+        toast.success("Udało się utworzyć głosowania");
+      }
       history.push("/admin/createdPolls");
     } catch (err) {
       toast.error("Coś poszło nie tak :( " + err);
@@ -93,7 +120,10 @@ const PollForm = () => {
           className={"mt20"}
           onChange={toggleCheckBox}
         />
-        <Button className={"mt20"} value={"Dodaj głosowanie"} />
+        <Button
+          className={"mt20"}
+          value={`${isEditPage ? "Edytuj głosowanie" : "Dodaj głosowanie"}`}
+        />
       </form>
     </div>
   );

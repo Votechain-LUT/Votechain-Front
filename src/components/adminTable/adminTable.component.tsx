@@ -5,7 +5,6 @@ import { Poll } from "../../types";
 import { getPageName } from "../../helpers";
 import { useHistory } from "react-router";
 import editIcon from "../../assets/edit.png";
-import deleteIcon from "../../assets/delete.png";
 
 type Props = {
   polls: Poll[];

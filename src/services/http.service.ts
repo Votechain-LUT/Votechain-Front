@@ -1,4 +1,5 @@
 import axios from "axios";
+import rateLimit from "axios-rate-limit";
 import { AxiosResponse } from "axios";
 import store from "../redux/store";
 import { LoginRequest, Poll, Candidate, LoginResponse } from "../types";
@@ -6,9 +7,12 @@ import { LoginRequest, Poll, Candidate, LoginResponse } from "../types";
 class Http {
   private http;
   constructor() {
-    this.http = axios.create({
-      baseURL: "http://localhost:8000",
-    });
+    this.http = rateLimit(
+      axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+      }),
+      { maxRequests: 2, perMilliseconds: 1000 }
+    );
   }
 
   private setHeaders() {

@@ -3,6 +3,7 @@ import rateLimit from "axios-rate-limit";
 import { AxiosResponse } from "axios";
 import store from "../redux/store";
 import { LoginRequest, Poll, Candidate, LoginResponse } from "../types";
+import { refreshToken } from "../redux/user.slice";
 
 class Http {
   private http;
@@ -17,8 +18,13 @@ class Http {
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-          window.location.href =
-            process.env.REACT_APP_APP_URL || "http://localhost:3000";
+          const accessToken = store.getState().user.accessToken;
+          if (accessToken) {
+            store.dispatch(refreshToken());
+          } else {
+            window.location.href =
+              process.env.REACT_APP_APP_URL || "http://localhost:3000";
+          }
         }
       }
     );
@@ -34,6 +40,10 @@ class Http {
     requestBody: LoginRequest
   ): Promise<AxiosResponse<LoginResponse>> {
     return this.http.post("/auth/token", requestBody);
+  }
+
+  public refreshToken(): Promise<AxiosResponse<LoginResponse>> {
+    return this.http.post("/auth/token/refresh");
   }
 
   public getOngoingPolls(): Promise<AxiosResponse<Poll[]>> {

@@ -26,7 +26,7 @@ const ConfirmModal: React.FC<Props> = ({
         : (overlay.style.display = "none");
     }
     setVisible(isVisible);
-  }, [isVisible]);
+  }, [isVisible, overlay]);
 
   const hideModal = () => {
     if (overlay) overlay.style.display = "none";

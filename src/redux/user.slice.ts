@@ -65,3 +65,18 @@ export const fetchToken = (requestBody: LoginRequest): AppThunk => async (
     dispatch(getTokenFailure(err));
   }
 };
+
+export const refreshToken = (): AppThunk => async (dispatch) => {
+  const http = new Http();
+  try {
+    const response = await http.refreshToken();
+    dispatch(
+      getTokenSuccess({
+        accessToken: response.data.access,
+        jwtExpiryDate: response.data.expires,
+      })
+    );
+  } catch (err) {
+    dispatch(getTokenFailure(err));
+  }
+};

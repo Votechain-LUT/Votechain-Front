@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "../../pages/login/login.component";
 import NotFoundPage from "../../pages/notFound/notFound.component";
 import NewCandidatePage from "../../pages/admin/candidate/new/newCandidate.component";

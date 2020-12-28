@@ -13,13 +13,8 @@ export type Poll = {
 };
 
 export type Candidate = {
+  id?: number;
   name: string;
-};
-
-export type ConfirmModalProps = {
-  headerTitle?: string;
-  message?: string;
-  isVisible: boolean;
 };
 
 export type LoginResponse = {

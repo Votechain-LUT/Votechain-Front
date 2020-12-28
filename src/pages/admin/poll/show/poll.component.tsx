@@ -3,10 +3,13 @@ import "./poll.styles.scss";
 import { useHistory, useParams } from "react-router";
 import { Sidebar } from "../../../../components/sidebar/sidebar.component";
 import Http from "../../../../services/http.service";
-import { Poll } from "../../../../types";
+import { Candidate, Poll } from "../../../../types";
 import { getPollStatus } from "../../../../helpers";
 import Button from "../../../../components/button/button.component";
 import { Location } from "history";
+import deleteIcon from "../../../../assets/delete.png";
+import ConfirmModal from "../../../../components/confirmModal/confirmModal.component";
+import { toast } from "react-toastify";
 
 type ParamTypes = {
   pollId: string;
@@ -24,7 +27,9 @@ type Props = {
 
 const PollPage: React.FC<Props> = ({ location }) => {
   const [poll, setPoll] = useState<Poll>();
+  const [candidateToDelete, setCandidate] = useState<Candidate | null>();
   const [pollStatus, setPollStatus] = useState("");
+  const [modalVisible, toggleModal] = useState(false);
   const { pollId } = useParams<ParamTypes>();
   const history = useHistory();
 
@@ -40,7 +45,32 @@ const PollPage: React.FC<Props> = ({ location }) => {
       setPollStatus(location.state.pollType);
     };
     fetchPoll();
-  }, [history, location.state.pollType, pollId]);
+  }, [history, location.state.pollType, pollId, candidateToDelete]);
+
+  const showDeleteModal = (candidate: Candidate) => {
+    toggleModal(true);
+    setCandidate(candidate);
+  };
+
+  const deleteCandidate = async () => {
+    const http = new Http();
+    try {
+      if (poll && poll.id && candidateToDelete && candidateToDelete.id) {
+        await http.deleteCandidate(poll.id, candidateToDelete.id);
+        setCandidate(null);
+        toast.success("Udało się usunąć kandydata");
+        history.push({
+          pathname: `/admin/poll/${poll.id}`,
+          state: {
+            pollType: pollStatus,
+          },
+        });
+      }
+    } catch (err) {
+      toast.error("Coś poszło nie tak :( " + err.response.data.detail);
+    }
+  };
+
   return (
     <section className={"pollPage"}>
       <Sidebar sidebarField={""} />
@@ -57,6 +87,7 @@ const PollPage: React.FC<Props> = ({ location }) => {
               <tr>
                 <th>Kandydat</th>
                 <th>Liczba zdobytych głosów</th>
+                <th>Akcje</th>
               </tr>
             </thead>
             <tbody>
@@ -66,6 +97,16 @@ const PollPage: React.FC<Props> = ({ location }) => {
                     <tr key={key}>
                       <td>{candidate.name}</td>
                       <td>0</td>
+                      <td>
+                        <div
+                          role={"presentation"}
+                          onClick={() => showDeleteModal(candidate)}
+                          className={"iconContainer"}
+                        >
+                          <img src={deleteIcon} alt={"deleteIcon"} />
+                          <span>Usuń kandydata</span>
+                        </div>
+                      </td>
                     </tr>
                   );
                 })}
@@ -85,6 +126,13 @@ const PollPage: React.FC<Props> = ({ location }) => {
           </div>
         </div>
       )}
+      <ConfirmModal
+        headerText={"Usuń kandydata"}
+        message={"Czy na pewno chcesz usunąć tego kandydata?"}
+        isVisible={modalVisible}
+        handleSubmit={deleteCandidate}
+        toggleModal={toggleModal}
+      />
     </section>
   );
 };

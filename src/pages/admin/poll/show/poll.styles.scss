@@ -40,9 +40,16 @@
     }
   }
 
-  //.buttonsSection{
-  //  button:first-child{
-  //    margin-right:20px;
-  //  }
-  //}
+  .iconContainer{
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    &:first-child{
+      margin-right:20px;
+    }
+    img{
+      max-width:15px;
+      margin-right:10px;
+    }
+  }
 }

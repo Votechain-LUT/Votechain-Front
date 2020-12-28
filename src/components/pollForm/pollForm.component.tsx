@@ -78,7 +78,7 @@ const PollForm: React.FC = () => {
       }
       history.push("/admin/createdPolls");
     } catch (err) {
-      toast.error("Coś poszło nie tak :( " + err);
+      toast.error("Coś poszło nie tak :( " + err.response.data.detail);
     }
   };
 

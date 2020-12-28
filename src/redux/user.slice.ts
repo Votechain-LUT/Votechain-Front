@@ -50,7 +50,7 @@ export const fetchToken = (requestBody: LoginRequest): AppThunk => async (
     dispatch(getTokenSuccess({ token: token.data.access }));
     toast.success("Logowanie przebiegło pomyślnie");
   } catch (err) {
-    toast.error("Coś poszło nie tak :( " + err);
+    toast.error("Coś poszło nie tak :( " + err.response.data.detail);
     dispatch(getTokenFailure(err));
   }
 };

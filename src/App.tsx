@@ -16,9 +16,10 @@ const App: React.FC = () => {
   const location = useLocation();
   const [sidebarField, setSidebarField] = useState("");
   const { showSidebar, token } = useSelector((state: RootState) => {
+    console.log(state.user);
     return {
       showSidebar: state.app.showSidebar,
-      token: state.user.token,
+      token: state.user.accessToken,
     };
   });
 

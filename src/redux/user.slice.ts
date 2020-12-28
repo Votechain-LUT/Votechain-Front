@@ -5,17 +5,20 @@ import Http from "../services/http.service";
 import { toast } from "react-toastify";
 
 interface UserState {
-  token: string | null;
+  accessToken: string | null;
+  jwtExpiryDate: string | null;
   error: string | null;
 }
 
 interface TokenLoaded {
-  token: string;
+  accessToken: string;
+  jwtExpiryDate: string;
 }
 
 const initialState: UserState = {
-  token: null,
+  accessToken: null,
   error: null,
+  jwtExpiryDate: null,
 };
 
 const user = createSlice({
@@ -23,16 +26,19 @@ const user = createSlice({
   initialState,
   reducers: {
     getTokenSuccess(state, action: PayloadAction<TokenLoaded>) {
-      const { token } = action.payload;
+      const { accessToken, jwtExpiryDate } = action.payload;
       state.error = null;
-      state.token = token;
+      state.accessToken = accessToken;
+      state.jwtExpiryDate = jwtExpiryDate;
     },
     getTokenFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
     },
     logout(state) {
-      state.token = null;
+      state.jwtExpiryDate = null;
+      state.accessToken = null;
       state.error = null;
+      window.localStorage.setItem("logout", String(Date.now()));
     },
   },
 });
@@ -46,8 +52,13 @@ export const fetchToken = (requestBody: LoginRequest): AppThunk => async (
 ) => {
   const http = new Http();
   try {
-    const token = await http.signIn(requestBody);
-    dispatch(getTokenSuccess({ token: token.data.access }));
+    const response = await http.signIn(requestBody);
+    dispatch(
+      getTokenSuccess({
+        accessToken: response.data.access,
+        jwtExpiryDate: response.data.expires,
+      })
+    );
     toast.success("Logowanie przebiegło pomyślnie");
   } catch (err) {
     toast.error("Coś poszło nie tak :( " + err.response.data.detail);

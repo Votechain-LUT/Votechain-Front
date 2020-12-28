@@ -1,12 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface AppState {
   showSidebar: boolean;
-}
-
-interface SetModal {
-  headerText: string;
-  message: string;
 }
 
 const initialState: AppState = {

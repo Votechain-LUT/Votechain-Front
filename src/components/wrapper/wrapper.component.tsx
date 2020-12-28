@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import LoginPage from "../../pages/login/login.component";
 import NotFoundPage from "../../pages/notFound/notFound.component";
 import NewCandidatePage from "../../pages/admin/candidate/new/newCandidate.component";
@@ -18,6 +23,19 @@ import pl from "date-fns/locale/pl";
 registerLocale("pl", pl);
 
 export const Wrapper: React.FC = () => {
+  useEffect(() => {
+    const syncLogout = (event: StorageEvent) => {
+      if (event.key === "logout") {
+        window.location.href =
+          process.env.REACT_APP_APP_URL || "http://localhost:3000";
+      }
+    };
+    window.addEventListener("storage", syncLogout);
+    return () => {
+      window.removeEventListener("storage", syncLogout);
+    };
+  }, []);
+
   return (
     <div>
       <Provider store={store}>

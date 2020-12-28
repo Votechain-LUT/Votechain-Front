@@ -13,11 +13,20 @@ class Http {
       }),
       { maxRequests: 2, perMilliseconds: 1000 }
     );
+    this.http.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response.status === 401) {
+          window.location.href =
+            process.env.REACT_APP_APP_URL || "http://localhost:3000";
+        }
+      }
+    );
   }
 
   private setHeaders() {
     this.http.defaults.headers["Authorization"] = `Bearer ${
-      store.getState().user.token
+      store.getState().user.accessToken
     }`;
   }
 

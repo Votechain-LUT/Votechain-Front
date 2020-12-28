@@ -19,5 +19,5 @@ export type Candidate = {
 
 export type LoginResponse = {
   access: string;
-  refresh: string;
+  expires: string;
 };

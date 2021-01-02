@@ -51,7 +51,7 @@ export const Wrapper: React.FC = () => {
               component={AdminDashboard}
             />
             <PrivateRoute
-              path={"/admin/createdPolls"}
+              path={"/admin/canceledPolls"}
               component={AdminDashboard}
             />
             <PrivateRoute path={"/admin/newPoll"} component={NewPollPage} />

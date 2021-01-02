@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./pollForm.styles.scss";
 import FormInput from "../formInput/formInput.component";
 import DateTimePicker from "../dateTimePicker/dateTimePicker.component";
-import CheckBox from "../checkbox/checkBox.component";
 import Button from "../button/button.component";
 import { toast } from "react-toastify";
 import Http from "../../services/http.service";
@@ -20,7 +19,6 @@ const PollForm: React.FC = () => {
   const params = useParams<ParamType>();
   const isEditPage = location.pathname.includes("edit");
   const [title, setTitle] = useState("");
-  const [isActive, setActive] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(tomorrowDate);
 
@@ -33,7 +31,6 @@ const PollForm: React.FC = () => {
         setTitle(json.data.title);
         setStartDate(new Date(parseDate(json.data.start)));
         setEndDate(new Date(parseDate(json.data.end)));
-        setActive(json.data.isActive);
       };
       fetchPoll();
     }
@@ -44,10 +41,6 @@ const PollForm: React.FC = () => {
   };
   const changeEndDate = (date: Date | [Date, Date] | null) => {
     date && !Array.isArray(date) && setEndDate(date);
-  };
-
-  const toggleCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setActive(e.target.checked);
   };
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -65,7 +58,7 @@ const PollForm: React.FC = () => {
       title: title,
       start: formatDate(startDate),
       end: formatDate(endDate),
-      isActive: isActive,
+      isActive: false,
     };
 
     try {
@@ -76,7 +69,7 @@ const PollForm: React.FC = () => {
         await http.createPoll(requestBody);
         toast.success("Udało się utworzyć głosowania");
       }
-      history.push("/admin/createdPolls");
+      history.push("/admin/onGoingPolls");
     } catch (err) {
       toast.error("Coś poszło nie tak :( " + err.response.data.detail);
     }
@@ -113,12 +106,6 @@ const PollForm: React.FC = () => {
           timeCaption={"Czas"}
           selected={endDate}
           onChange={(date) => changeEndDate(date)}
-        />
-        <CheckBox
-          label={"Aktywne"}
-          isChecked={isActive}
-          className={"mt20"}
-          onChange={toggleCheckBox}
         />
         <Button
           className={"mt20"}

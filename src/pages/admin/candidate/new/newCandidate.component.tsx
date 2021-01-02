@@ -15,7 +15,7 @@ const NewCandidatePage: React.FC = () => {
   useEffect(() => {
     const http = new Http();
     const fetchPolls = async () => {
-      const json = await http.getFutureCreatedPolls();
+      const json = await http.getFuturePolls();
       setPolls(json.data);
       if (json.data.length) {
         selectPoll(json.data[0].id);

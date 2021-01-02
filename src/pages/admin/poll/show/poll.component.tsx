@@ -120,9 +120,6 @@ const PollPage: React.FC<Props> = ({ location }) => {
               pollStatus === "futurePolls") && (
               <Button value={"Rozpocznij głosowanie"} />
             )}
-            {pollStatus === "onGoingPolls" && (
-              <Button value={"Zakończ głosowanie"} />
-            )}
           </div>
         </div>
       )}

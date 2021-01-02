@@ -43,6 +43,7 @@ class Http {
   }
 
   public refreshToken(): Promise<AxiosResponse<LoginResponse>> {
+    this.http.defaults.withCredentials = true;
     return this.http.post("/auth/token/refresh");
   }
 
@@ -61,9 +62,9 @@ class Http {
     return this.http.get("/poll?ended=true");
   }
 
-  public getFutureCreatedPolls(): Promise<AxiosResponse<Poll[]>> {
+  public getCanceledPolls(): Promise<AxiosResponse<Poll[]>> {
     this.setHeaders();
-    return this.http.get("/poll?future=true&active=true");
+    return this.http.get("/poll?active=false");
   }
 
   public createPoll(requestBody: Poll): Promise<AxiosResponse<Poll>> {

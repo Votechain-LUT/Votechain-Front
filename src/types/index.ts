@@ -9,7 +9,6 @@ export type Poll = {
   start: string;
   candidates?: Candidate[];
   end: string;
-  isActive: boolean;
 };
 
 export type Candidate = {

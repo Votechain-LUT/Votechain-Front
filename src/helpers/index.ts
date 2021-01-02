@@ -12,8 +12,8 @@ export const getPageName = (sidebarField: string): string => {
       return "Nadchodzące głosowania";
     case "endedPolls":
       return "Zakończone głosowania";
-    case "createdPolls":
-      return "Utworzone głosowania";
+    case "canceledPolls":
+      return "Anulowane głosowania";
     case "newCandidate":
       return "Dodaj kandydata";
     case "newPoll":
@@ -31,8 +31,8 @@ export const getPollStatus = (url: string): string => {
       return "nadchodzące";
     case "endedPolls":
       return "zakończone";
-    case "createdPolls":
-      return "utworzone";
+    case "canceledPolls":
+      return "anulowane";
     default:
       return "";
   }

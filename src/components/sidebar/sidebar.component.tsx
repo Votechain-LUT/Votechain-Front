@@ -18,14 +18,14 @@ export const Sidebar: React.FC<Props> = ({ sidebarField }) => {
             <li className={sidebarField === "newPoll" ? "active" : ""}>
               <Link to={"/admin/newPoll"}>Dodaj nowe głosowanie</Link>
             </li>
-            <li className={sidebarField === "createdPolls" ? "active" : ""}>
-              <Link to={"/admin/createdPolls"}>Utworzone głosowania</Link>
-            </li>
             <li className={sidebarField === "onGoingPolls" ? "active" : ""}>
               <Link to={"/admin/onGoingPolls"}>Trwajace głosowania</Link>
             </li>
             <li className={sidebarField === "futurePolls" ? "active" : ""}>
               <Link to={"/admin/futurePolls"}>Nadchodzące głosowania</Link>
+            </li>
+            <li className={sidebarField === "canceledPolls" ? "active" : ""}>
+              <Link to={"/admin/canceledPolls"}>Anulowane głosowania</Link>
             </li>
             <li className={sidebarField === "endedPolls" ? "active" : ""}>
               <Link to={"/admin/endedPolls"}>Zakończone głosowania</Link>

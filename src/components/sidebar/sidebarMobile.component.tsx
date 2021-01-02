@@ -34,6 +34,9 @@ export const SidebarMobile: React.FC<Props> = ({ sidebarField }) => {
             <li className={sidebarField === "futurePolls" ? "active" : ""}>
               <Link to={"/admin/futurePolls"}>Nadchodzące głosowania</Link>
             </li>
+            <li className={sidebarField === "canceledPolls" ? "active" : ""}>
+              <Link to={"/admin/canceledPolls"}>Anulowane głosowania</Link>
+            </li>
             <li className={sidebarField === "endedPolls" ? "active" : ""}>
               <Link to={"/admin/endedPolls"}>Zakończone głosowania</Link>
             </li>

@@ -39,6 +39,7 @@ class Http {
   public signIn(
     requestBody: LoginRequest
   ): Promise<AxiosResponse<LoginResponse>> {
+    this.http.defaults.withCredentials = true;
     return this.http.post("/auth/token", requestBody);
   }
 

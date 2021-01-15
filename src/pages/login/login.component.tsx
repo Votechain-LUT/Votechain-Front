@@ -4,7 +4,7 @@ import LoginForm from "../../components/loginForm/loginForm.component";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/root.reducer";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { fetchToken } from "../../redux/user.slice";
 
 const LoginPage: React.FC = () => {
@@ -13,9 +13,15 @@ const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.user.accessToken);
   const history = useHistory();
+  const location = useLocation();
+  const isAdminRoute = location.pathname === "/admin";
 
   useEffect(() => {
-    if (token) history.push("/admin/onGoingPolls");
+    if (token) {
+      isAdminRoute
+        ? history.push("/admin/onGoingPolls")
+        : history.push("/polls");
+    }
   }, [token, history]);
 
   const onChange = (key: string, value: string) => {

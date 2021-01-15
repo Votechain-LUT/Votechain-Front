@@ -1,0 +1,19 @@
+.userForm{
+  .formInput{
+    display:flex;
+    flex-flow:column wrap;
+    label{
+      margin-bottom:10px;
+      font-weight:700;
+    }
+    input{
+      margin-bottom:10px;
+      padding:10px;
+      border:none;
+      border-bottom:1px solid #c3c3c3;
+      &:focus{
+        outline:0;
+      }
+    }
+  }
+}

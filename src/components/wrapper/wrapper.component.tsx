@@ -15,6 +15,8 @@ import { ToastContainer } from "react-toastify";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import pl from "date-fns/locale/pl";
+import PollsPage from "../../pages/polls/polls.component";
+import NewUserPage from "../../pages/admin/user/new/newUser.component";
 registerLocale("pl", pl);
 
 export const Wrapper: React.FC = () => {
@@ -38,6 +40,9 @@ export const Wrapper: React.FC = () => {
           <App />
           <Switch>
             <Route exact path={"/"} component={LoginPage} />
+            <Route exact path={"/admin"} component={LoginPage} />
+            <Route path={"/polls"} component={PollsPage} />
+            <PrivateRoute path={"/admin/newUser"} component={NewUserPage} />
             <PrivateRoute
               path={"/admin/onGoingPolls"}
               component={AdminDashboard}

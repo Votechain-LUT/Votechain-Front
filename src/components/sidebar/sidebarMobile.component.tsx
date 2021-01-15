@@ -55,6 +55,18 @@ export const SidebarMobile: React.FC<Props> = ({ sidebarField }) => {
           </ul>
         </div>
       </div>
+      <div className={"mt20"}>
+        <div className={"header"}>
+          <h1>Użytkownicy</h1>
+        </div>
+        <div>
+          <ul>
+            <li className={sidebarField === "newUser" ? "active" : ""}>
+              <Link to={"/admin/newCandidate"}>Dodaj użytkownika</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
   );
 };

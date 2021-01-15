@@ -45,6 +45,18 @@ export const Sidebar: React.FC<Props> = ({ sidebarField }) => {
           </ul>
         </div>
       </div>
+      <div className={"sidebarWrapper"}>
+        <div className={"sidebarHeader"}>
+          <h1>Użytkownicy</h1>
+        </div>
+        <div>
+          <ul>
+            <li className={sidebarField === "newUser" ? "active" : ""}>
+              <Link to={"/admin/newUser"}>Dodaj użytkownika</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
   );
 };

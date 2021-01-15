@@ -2,7 +2,7 @@ import axios from "axios";
 import rateLimit from "axios-rate-limit";
 import { AxiosResponse } from "axios";
 import store from "../redux/store";
-import { LoginRequest, Poll, Candidate, LoginResponse } from "../types";
+import { LoginRequest, Poll, Candidate, LoginResponse, User } from "../types";
 import { refreshToken } from "../redux/user.slice";
 
 class Http {
@@ -46,6 +46,11 @@ class Http {
   public refreshToken(): Promise<AxiosResponse<LoginResponse>> {
     this.http.defaults.withCredentials = true;
     return this.http.post("/auth/token/refresh");
+  }
+
+  public createUser(requestBody: User): Promise<AxiosResponse<User>> {
+    this.setHeaders();
+    return this.http.post("/admin/user/register", requestBody);
   }
 
   public getOngoingPolls(): Promise<AxiosResponse<Poll[]>> {

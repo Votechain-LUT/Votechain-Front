@@ -18,6 +18,8 @@ export const getPageName = (sidebarField: string): string => {
       return "Dodaj kandydata";
     case "newPoll":
       return "Dodaj głosowanie";
+    case "newUser":
+      return "Dodaj użytkownika";
     default:
       return "";
   }

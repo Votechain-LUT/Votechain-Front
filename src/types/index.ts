@@ -20,3 +20,10 @@ export type LoginResponse = {
   access: string;
   expires: string;
 };
+
+export type User = {
+  id?: number;
+  username: string;
+  password?: string;
+  email: string;
+};

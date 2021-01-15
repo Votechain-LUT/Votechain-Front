@@ -1,0 +1,32 @@
+.pollsPage{
+  padding:20px 60px;
+  .breadcumbs > span {
+    margin-right:20px;
+    cursor:pointer;
+  }
+  .tableWrapper{
+    margin-top:20px;
+    table{
+      width:100%;
+      border:2px solid #dbf3fb;
+      padding:10px 0;
+      border-radius:5px;
+      border-collapse: collapse;
+      thead > tr > th {
+        padding:10px;
+        text-align: left;
+      }
+      tbody > tr:hover {
+        color:#5d89f2;
+        background-color: #dbf3fb;
+        cursor:pointer;
+      }
+      tbody > tr > td{
+        padding:10px;
+        max-width: 100px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}

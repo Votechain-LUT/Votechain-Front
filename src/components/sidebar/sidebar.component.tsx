@@ -54,6 +54,9 @@ export const Sidebar: React.FC<Props> = ({ sidebarField }) => {
             <li className={sidebarField === "newUser" ? "active" : ""}>
               <Link to={"/admin/newUser"}>Dodaj użytkownika</Link>
             </li>
+            <li className={sidebarField === "users" ? "active" : ""}>
+              <Link to={"/admin/users"}>Lista użytkowników</Link>
+            </li>
           </ul>
         </div>
       </div>

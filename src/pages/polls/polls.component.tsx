@@ -9,7 +9,7 @@ const PollsPage: React.FC = () => {
   useEffect(() => {
     const http = new Http();
     const fetchPolls = async () => {
-      const json = await http.getOngoingPolls();
+      const json = await http.getVoterPolls();
       setPolls(json.data);
     };
     fetchPolls();

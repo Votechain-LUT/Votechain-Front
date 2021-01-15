@@ -26,6 +26,7 @@ class Http {
               process.env.REACT_APP_APP_URL || "http://localhost:3000";
           }
         }
+        return Promise.reject(error);
       }
     );
   }
@@ -50,7 +51,17 @@ class Http {
 
   public createUser(requestBody: User): Promise<AxiosResponse<User>> {
     this.setHeaders();
-    return this.http.post("/admin/user/register", requestBody);
+    return this.http.post("/admin/user", requestBody);
+  }
+
+  public getUsers(): Promise<AxiosResponse<User[]>> {
+    this.setHeaders();
+    return this.http.get("/admin/user");
+  }
+
+  public getVoterPolls(): Promise<AxiosResponse<Poll[]>> {
+    this.setHeaders();
+    return this.http.get("/voter/poll");
   }
 
   public getOngoingPolls(): Promise<AxiosResponse<Poll[]>> {

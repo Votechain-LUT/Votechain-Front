@@ -5,11 +5,13 @@ import Button from "../button/button.component";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../helpers";
 import Http from "../../services/http.service";
+import { useHistory } from "react-router";
 
 const UserForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,10 +35,10 @@ const UserForm: React.FC = () => {
     const http = new Http();
     try {
       await http.createUser(requestBody);
+      history.push("/admin/users");
     } catch (err) {
-      toast.error("Coś poszło nie tak :( " + err.response.data.detail);
+      toast.error("Coś poszło nie tak :( " + err.response.data.username);
     }
-    // dodać history.push("/admin/users")
   };
 
   return (

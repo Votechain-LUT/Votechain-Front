@@ -17,6 +17,7 @@ import { registerLocale } from "react-datepicker";
 import pl from "date-fns/locale/pl";
 import PollsPage from "../../pages/polls/polls.component";
 import NewUserPage from "../../pages/admin/user/new/newUser.component";
+import UserListPage from "../../pages/admin/user/index/userList.component";
 registerLocale("pl", pl);
 
 export const Wrapper: React.FC = () => {
@@ -43,6 +44,7 @@ export const Wrapper: React.FC = () => {
             <Route exact path={"/admin"} component={LoginPage} />
             <Route path={"/polls"} component={PollsPage} />
             <PrivateRoute path={"/admin/newUser"} component={NewUserPage} />
+            <PrivateRoute path={"/admin/users"} component={UserListPage} />
             <PrivateRoute
               path={"/admin/onGoingPolls"}
               component={AdminDashboard}

@@ -37,8 +37,8 @@ const LoginPage: React.FC = () => {
       return;
     }
 
-    if (password.length < 5) {
-      toast.error("Hasło musi zawierać przynajmniej 5 znaków");
+    if (password.length < 3) {
+      toast.error("Hasło musi zawierać przynajmniej 3 znaki");
       return;
     }
     const requestBody = {

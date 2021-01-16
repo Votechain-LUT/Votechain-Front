@@ -9,6 +9,7 @@ import {
   LoginResponse,
   User,
   ChangePasswordRequest,
+  GenerateTokensRequest,
 } from "../types";
 import { refreshToken } from "../redux/user.slice";
 
@@ -66,6 +67,14 @@ class Http {
   ): Promise<AxiosResponse<ChangePasswordRequest>> {
     this.setHeaders();
     return this.http.put("/voter/password", requestBody);
+  }
+
+  public generateTokens(
+    pollId: number,
+    requestBody: GenerateTokensRequest
+  ): Promise<AxiosResponse<GenerateTokensRequest>> {
+    this.setHeaders();
+    return this.http.post(`/poll/${pollId}/generate_tokens`, requestBody);
   }
 
   public getUsers(): Promise<AxiosResponse<User[]>> {

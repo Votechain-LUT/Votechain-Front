@@ -7,9 +7,24 @@ import { toast } from "react-toastify";
 import Http from "../../services/http.service";
 import { useHistory, useLocation, useParams } from "react-router";
 import { formatDate, parseDate } from "../../helpers";
+import MultiSelect from "react-multi-select-component";
+import { GenerateTokensRequest } from "../../types";
 
 type ParamType = {
   id: string;
+};
+
+type MultiSelectOption = {
+  label: string;
+  value: string;
+};
+
+const selectStrings = {
+  selectSomeItems: "Wybierz użytkowników",
+  allItemsAreSelected: "Wszyscy użytkownicy są zaznaczeni",
+  selectAll: "Zaznacz wszystkich",
+  search: "Wyszukaj",
+  clearSearch: "Wyczyść",
 };
 
 const PollForm: React.FC = () => {
@@ -21,17 +36,30 @@ const PollForm: React.FC = () => {
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(tomorrowDate);
-
+  const [users, setUsers] = useState<MultiSelectOption[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<MultiSelectOption[]>([]);
   useEffect(() => {
+    const http = new Http();
     if (isEditPage) {
       const fetchPoll = async () => {
-        const http = new Http();
         const pollId = params.id;
         const json = await http.getPoll(parseInt(pollId));
         setTitle(json.data.title);
         setStartDate(new Date(parseDate(json.data.start)));
         setEndDate(new Date(parseDate(json.data.end)));
       };
+      const fetchUsers = async () => {
+        const json = await http.getUsers();
+        const users: React.SetStateAction<MultiSelectOption[]> = [];
+        json.data.map((user) => {
+          users.push({
+            label: user.email,
+            value: user.email,
+          });
+        });
+        setUsers(users);
+      };
+      fetchUsers();
       fetchPoll();
     }
   }, [isEditPage, params.id]);
@@ -60,10 +88,14 @@ const PollForm: React.FC = () => {
       end: formatDate(endDate),
       isActive: false,
     };
-
+    const userRequestBody: GenerateTokensRequest = { users: [] };
+    selectedUsers.map((user) => {
+      userRequestBody.users.push(user.value);
+    });
     try {
       if (isEditPage) {
         await http.updatePoll(parseInt(params.id), requestBody);
+        await http.generateTokens(parseInt(params.id), userRequestBody);
         toast.success("Udało się zaktualizować głosowanie");
       } else {
         await http.createPoll(requestBody);
@@ -74,7 +106,6 @@ const PollForm: React.FC = () => {
       toast.error("Coś poszło nie tak :( " + err.response.data.detail);
     }
   };
-
   return (
     <div className={"pollForm"}>
       <form onSubmit={onSubmit}>
@@ -107,6 +138,17 @@ const PollForm: React.FC = () => {
           selected={endDate}
           onChange={(date) => changeEndDate(date)}
         />
+        {isEditPage && (
+          <MultiSelect
+            className={"mt20"}
+            hasSelectAll={false}
+            options={users}
+            labelledBy={"Użytkownicy"}
+            value={selectedUsers}
+            onChange={setSelectedUsers}
+            overrideStrings={selectStrings}
+          />
+        )}
         <Button
           className={"mt20"}
           value={`${isEditPage ? "Edytuj głosowanie" : "Dodaj głosowanie"}`}

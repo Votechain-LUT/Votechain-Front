@@ -33,3 +33,7 @@ export type ChangePasswordRequest = {
   password: string;
   confirm_password: string;
 };
+
+export type GenerateTokensRequest = {
+  users: string[];
+};

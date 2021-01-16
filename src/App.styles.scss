@@ -78,6 +78,7 @@ a{
 }
 .logout{
   text-align: right;
+  margin-left:20px;
   &:hover{
     cursor: pointer;
   }
@@ -93,4 +94,8 @@ a{
 
 .hidden{
   display: none;
+}
+
+.pointer {
+  cursor:pointer;
 }

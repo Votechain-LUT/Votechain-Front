@@ -19,8 +19,8 @@ const UserForm: React.FC = () => {
       toast.error("Nazwa użytkownika musi zawierać przynajmniej 3 znaki");
       return;
     }
-    if (password.length < 3) {
-      toast.error("Hasło musi zawierać przynajmniej 3 znaki");
+    if (password.length < 8) {
+      toast.error("Hasło musi zawierać przynajmniej 8 znaków");
       return;
     }
     if (!validateEmail(email)) {

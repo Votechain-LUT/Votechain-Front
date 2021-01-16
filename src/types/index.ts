@@ -27,3 +27,9 @@ export type User = {
   password?: string;
   email: string;
 };
+
+export type ChangePasswordRequest = {
+  old_password: string;
+  password: string;
+  confirm_password: string;
+};

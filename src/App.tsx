@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import menuLogo from "./assets/menu.png";
 import "./App.styles.scss";
@@ -14,7 +14,9 @@ import appLogo from "./assets/appLogo.png";
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
   const [sidebarField, setSidebarField] = useState("");
+  const isAdminRoute = location.pathname.includes("admin");
   const { showSidebar, token } = useSelector((state: RootState) => {
     return {
       showSidebar: state.app.showSidebar,
@@ -38,13 +40,24 @@ const App: React.FC = () => {
           alt={"menuLogo"}
         />
         {token && (
-          <span
-            role={"presentation"}
-            onClick={() => dispatch(logout())}
-            className={"logout"}
-          >
-            Wyloguj się
-          </span>
+          <div>
+            {!isAdminRoute && (
+              <span
+                className={"pointer"}
+                role={"presentation"}
+                onClick={() => history.push("/changePassword")}
+              >
+                Zmień hasło
+              </span>
+            )}
+            <span
+              role={"presentation"}
+              onClick={() => dispatch(logout())}
+              className={"logout"}
+            >
+              Wyloguj się
+            </span>
+          </div>
         )}
       </div>
       <div className={"logoContainer"}>

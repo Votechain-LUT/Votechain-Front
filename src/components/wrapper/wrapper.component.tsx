@@ -18,6 +18,7 @@ import pl from "date-fns/locale/pl";
 import PollsPage from "../../pages/polls/polls.component";
 import NewUserPage from "../../pages/admin/user/new/newUser.component";
 import UserListPage from "../../pages/admin/user/index/userList.component";
+import ChangePasswordPage from "../../pages/admin/user/changePassword/changePassword.component";
 registerLocale("pl", pl);
 
 export const Wrapper: React.FC = () => {
@@ -42,7 +43,11 @@ export const Wrapper: React.FC = () => {
           <Switch>
             <Route exact path={"/"} component={LoginPage} />
             <Route exact path={"/admin"} component={LoginPage} />
-            <Route path={"/polls"} component={PollsPage} />
+            <PrivateRoute path={"/polls"} component={PollsPage} />
+            <PrivateRoute
+              path={"/changePassword"}
+              component={ChangePasswordPage}
+            />
             <PrivateRoute path={"/admin/newUser"} component={NewUserPage} />
             <PrivateRoute path={"/admin/users"} component={UserListPage} />
             <PrivateRoute

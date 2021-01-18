@@ -117,6 +117,18 @@ class Http {
     return this.http.get(`/poll/${id}`);
   }
 
+  public vote(
+    pollId: number | undefined,
+    candidateId: number,
+    token: string
+  ): Promise<AxiosResponse<string>> {
+    this.setHeaders();
+    return this.http.post(
+      `/voter/poll/${pollId}/candidate/${candidateId}`,
+      token
+    );
+  }
+
   public updatePoll(
     id: number,
     requestBody: Poll

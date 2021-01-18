@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./polls.styles.scss";
 import Http from "../../services/http.service";
 import { Poll } from "../../types";
+import { Link } from "react-router-dom";
 
 const PollsPage: React.FC = () => {
   const [polls, setPolls] = useState<Poll[]>([]);
@@ -30,7 +31,16 @@ const PollsPage: React.FC = () => {
               {polls.map((poll) => {
                 return (
                   <tr key={poll.id}>
-                    <td>{poll.title}</td>
+                    <td>
+                      <Link
+                        to={{
+                          pathname: `/polls/${poll.id}`,
+                          state: { poll: poll },
+                        }}
+                      >
+                        {poll.title}
+                      </Link>
+                    </td>
                     <td>{poll.start}</td>
                     <td>{poll.end}</td>
                     <td>{poll.candidates?.length}</td>

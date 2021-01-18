@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import Http from "../../services/http.service";
 import { useHistory, useLocation, useParams } from "react-router";
 import { formatDate, parseDate } from "../../helpers";
-import MultiSelect from "react-multi-select-component";
 import { GenerateTokensRequest } from "../../types";
+import Select, { ValueType } from "react-select";
 
 type ParamType = {
   id: string;
@@ -17,14 +17,6 @@ type ParamType = {
 type MultiSelectOption = {
   label: string;
   value: string;
-};
-
-const selectStrings = {
-  selectSomeItems: "Wybierz użytkowników",
-  allItemsAreSelected: "Wszyscy użytkownicy są zaznaczeni",
-  selectAll: "Zaznacz wszystkich",
-  search: "Wyszukaj",
-  clearSearch: "Wyczyść",
 };
 
 const PollForm: React.FC = () => {
@@ -37,7 +29,9 @@ const PollForm: React.FC = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(tomorrowDate);
   const [users, setUsers] = useState<MultiSelectOption[]>([]);
-  const [selectedUsers, setSelectedUsers] = useState<MultiSelectOption[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<
+    ValueType<MultiSelectOption, true>
+  >([]);
   useEffect(() => {
     const http = new Http();
     if (isEditPage) {
@@ -89,9 +83,10 @@ const PollForm: React.FC = () => {
       isActive: false,
     };
     const userRequestBody: GenerateTokensRequest = { users: [] };
-    selectedUsers.map((user) => {
-      userRequestBody.users.push(user.value);
-    });
+    selectedUsers &&
+      selectedUsers.map((user) => {
+        userRequestBody.users.push(user.value);
+      });
     try {
       if (isEditPage) {
         await http.updatePoll(parseInt(params.id), requestBody);
@@ -106,6 +101,11 @@ const PollForm: React.FC = () => {
       toast.error("Coś poszło nie tak :( " + err.response.data.detail);
     }
   };
+
+  const onChange = (user: ValueType<MultiSelectOption, true>) => {
+    setSelectedUsers(user);
+  };
+
   return (
     <div className={"pollForm"}>
       <form onSubmit={onSubmit}>
@@ -139,14 +139,13 @@ const PollForm: React.FC = () => {
           onChange={(date) => changeEndDate(date)}
         />
         {isEditPage && (
-          <MultiSelect
-            className={"mt20"}
-            hasSelectAll={false}
-            options={users}
-            labelledBy={"Użytkownicy"}
+          <Select
             value={selectedUsers}
-            onChange={setSelectedUsers}
-            overrideStrings={selectStrings}
+            onChange={onChange}
+            className={"mt20"}
+            isMulti={true}
+            options={users}
+            placeholder={"Wybierz użytkowników"}
           />
         )}
         <Button

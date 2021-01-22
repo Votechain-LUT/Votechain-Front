@@ -80,7 +80,7 @@ const PollForm: React.FC = () => {
       title: title,
       start: formatDate(startDate),
       end: formatDate(endDate),
-      isActive: false,
+      isActive: true,
     };
     const userRequestBody: GenerateTokensRequest = { users: [] };
     selectedUsers &&
@@ -90,7 +90,9 @@ const PollForm: React.FC = () => {
     try {
       if (isEditPage) {
         await http.updatePoll(parseInt(params.id), requestBody);
-        await http.generateTokens(parseInt(params.id), userRequestBody);
+        if (userRequestBody.users.length > 0) {
+          await http.generateTokens(parseInt(params.id), userRequestBody);
+        }
         toast.success("Udało się zaktualizować głosowanie");
       } else {
         await http.createPoll(requestBody);

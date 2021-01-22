@@ -89,12 +89,12 @@ class Http {
 
   public getOngoingPolls(): Promise<AxiosResponse<Poll[]>> {
     this.setHeaders();
-    return this.http.get("/poll?ongoing=true");
+    return this.http.get("/poll?ongoing=true&active=true");
   }
 
   public getFuturePolls(): Promise<AxiosResponse<Poll[]>> {
     this.setHeaders();
-    return this.http.get("/poll?future=true");
+    return this.http.get("/poll?future=true&active=true");
   }
 
   public getEndedPolls(): Promise<AxiosResponse<Poll[]>> {
@@ -133,6 +133,7 @@ class Http {
     id: number,
     requestBody: Poll
   ): Promise<AxiosResponse<Poll>> {
+    console.log(id, requestBody);
     this.setHeaders();
     return this.http.put(`/poll/${id}`, requestBody);
   }
@@ -142,25 +143,12 @@ class Http {
     return this.http.post(`/poll/${id}/start`);
   }
 
-  public getCandidateList(id: number): Promise<AxiosResponse<Candidate[]>> {
-    this.setHeaders();
-    return this.http.get(`/poll/${id}/candidate`);
-  }
-
   public addCandidateToPoll(
     id: number,
     requestBody: Candidate
   ): Promise<AxiosResponse<Candidate>> {
     this.setHeaders();
     return this.http.post(`/poll/${id}/candidate`, requestBody);
-  }
-
-  public getCandidate(
-    pollId: number,
-    candidateId: number
-  ): Promise<AxiosResponse<Candidate>> {
-    this.setHeaders();
-    return this.http.get(`/poll/${pollId}/candidate/${candidateId}`);
   }
 
   public deleteCandidate(

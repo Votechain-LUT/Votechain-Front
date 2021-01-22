@@ -71,6 +71,17 @@ const PollPage: React.FC<Props> = ({ location }) => {
     }
   };
 
+  const startPoll = async () => {
+    const http = new Http();
+    try {
+      await http.startPoll(parseInt(pollId));
+      toast.success("Głosowanie zostało rozpoczęte");
+      history.push("/admin/onGoingPolls");
+    } catch (err) {
+      toast.error("Coś poszło nie tak :( " + err.response.detail);
+    }
+  };
+
   return (
     <section className={"pollPage"}>
       <Sidebar sidebarField={""} />
@@ -112,13 +123,13 @@ const PollPage: React.FC<Props> = ({ location }) => {
                 })}
             </tbody>
           </table>
-          {pollStatus === "onGoingPolls" && (
-            <Button className={"mb20"} value={"Odśwież wyniki"} />
-          )}
           <div className={"buttonsSection"}>
             {(pollStatus === "createdPolls" ||
               pollStatus === "futurePolls") && (
-              <Button value={"Rozpocznij głosowanie"} />
+              <Button
+                handleClick={() => startPoll()}
+                value={"Rozpocznij głosowanie"}
+              />
             )}
           </div>
         </div>

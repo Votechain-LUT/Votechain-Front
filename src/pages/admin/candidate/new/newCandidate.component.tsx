@@ -39,7 +39,7 @@ const NewCandidatePage: React.FC = () => {
         };
         await http.addCandidateToPoll(selectedPollId, body);
         toast.success("Kandydat został dodany do głosowania");
-        history.push("/admin/createdPolls");
+        history.push("/admin/futurePolls");
       }
     } catch (err) {
       toast.error("Coś poszło nie tak :( " + err.message);

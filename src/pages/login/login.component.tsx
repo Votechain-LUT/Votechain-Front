@@ -4,25 +4,24 @@ import LoginForm from "../../components/loginForm/loginForm.component";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/root.reducer";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 import { fetchToken } from "../../redux/user.slice";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const isAdmin = useSelector((state: RootState) => state.user.isAdmin);
   const token = useSelector((state: RootState) => state.user.accessToken);
   const history = useHistory();
-  const location = useLocation();
-  const isAdminRoute = location.pathname === "/admin";
 
   useEffect(() => {
-    if (token) {
-      isAdminRoute
-        ? history.push("/admin/onGoingPolls")
-        : history.push("/polls");
+    if (isAdmin && token) {
+      history.push("/admin/onGoingPolls");
+    } else if (!isAdmin && token) {
+      history.push("/polls");
     }
-  }, [token, history]);
+  }, [isAdmin, token]);
 
   const onChange = (key: string, value: string) => {
     key === "username" ? setUsername(value) : setPassword(value);
@@ -32,13 +31,13 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     setUsername("");
     setPassword("");
-    if (username.length < 3) {
-      toast.error("Nazwa użytkownika musi zawierać przynajmniej 3 znaki");
+    if (username.length < 3 || username.length > 15) {
+      toast.error("Nazwa użytkownika musi zawierać od 3 do 15 znaków");
       return;
     }
 
-    if (password.length < 3) {
-      toast.error("Hasło musi zawierać przynajmniej 3 znaki");
+    if (password.length < 3 || password.length > 15) {
+      toast.error("Hasło musi zawierać od 3 do 15 znaków");
       return;
     }
     const requestBody = {

@@ -19,6 +19,7 @@ export type Candidate = {
 export type LoginResponse = {
   access: string;
   expires: string;
+  isAdmin: string;
 };
 
 export type User = {

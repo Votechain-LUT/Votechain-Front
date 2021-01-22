@@ -7,18 +7,21 @@ import { toast } from "react-toastify";
 interface UserState {
   accessToken: string | null;
   jwtExpiryDate: string | null;
+  isAdmin: string | null;
   error: string | null;
 }
 
 interface TokenLoaded {
   accessToken: string;
   jwtExpiryDate: string;
+  isAdmin: string | null;
 }
 
 const initialState: UserState = {
   accessToken: null,
   error: null,
   jwtExpiryDate: null,
+  isAdmin: null,
 };
 
 const user = createSlice({
@@ -26,10 +29,11 @@ const user = createSlice({
   initialState,
   reducers: {
     getTokenSuccess(state, action: PayloadAction<TokenLoaded>) {
-      const { accessToken, jwtExpiryDate } = action.payload;
+      const { accessToken, jwtExpiryDate, isAdmin } = action.payload;
       state.error = null;
       state.accessToken = accessToken;
       state.jwtExpiryDate = jwtExpiryDate;
+      state.isAdmin = isAdmin;
     },
     getTokenFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -38,6 +42,7 @@ const user = createSlice({
       state.jwtExpiryDate = null;
       state.accessToken = null;
       state.error = null;
+      state.isAdmin = null;
       window.localStorage.setItem("logout", String(Date.now()));
     },
   },
@@ -57,6 +62,7 @@ export const fetchToken = (requestBody: LoginRequest): AppThunk => async (
       getTokenSuccess({
         accessToken: response.data.access,
         jwtExpiryDate: response.data.expires,
+        isAdmin: response.data.isAdmin,
       })
     );
     toast.success("Logowanie przebiegło pomyślnie");
@@ -74,6 +80,7 @@ export const refreshToken = (): AppThunk => async (dispatch) => {
       getTokenSuccess({
         accessToken: response.data.access,
         jwtExpiryDate: response.data.expires,
+        isAdmin: response.data.isAdmin,
       })
     );
   } catch (err) {

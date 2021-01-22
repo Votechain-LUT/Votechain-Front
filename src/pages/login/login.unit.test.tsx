@@ -9,7 +9,4 @@ describe("Login page tests", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-
-  it("renders without crashing", () => {
-  });
 });

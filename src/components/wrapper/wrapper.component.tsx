@@ -20,6 +20,7 @@ import NewUserPage from "../../pages/admin/user/new/newUser.component";
 import UserListPage from "../../pages/admin/user/index/userList.component";
 import ChangePasswordPage from "../../pages/admin/user/changePassword/changePassword.component";
 import UserPollPage from "../../pages/polls/poll.component";
+import AdminRoute from "../adminRoute/adminRoute.component";
 registerLocale("pl", pl);
 
 export const Wrapper: React.FC = () => {
@@ -43,41 +44,35 @@ export const Wrapper: React.FC = () => {
           <App />
           <Switch>
             <Route exact path={"/"} component={LoginPage} />
-            <Route exact path={"/admin"} component={LoginPage} />
             <PrivateRoute exact path={"/polls"} component={PollsPage} />
             <PrivateRoute
               path={"/changePassword"}
               component={ChangePasswordPage}
             />
             <PrivateRoute path={"/polls/:id"} component={UserPollPage} />
-            <PrivateRoute path={"/admin/newUser"} component={NewUserPage} />
-            <PrivateRoute path={"/admin/users"} component={UserListPage} />
-            <PrivateRoute
+
+            <AdminRoute path={"/admin/newUser"} component={NewUserPage} />
+            <AdminRoute path={"/admin/users"} component={UserListPage} />
+            <AdminRoute
               path={"/admin/onGoingPolls"}
               component={AdminDashboard}
             />
-            <PrivateRoute
+            <AdminRoute
               path={"/admin/futurePolls"}
               component={AdminDashboard}
             />
-            <PrivateRoute
-              path={"/admin/endedPolls"}
-              component={AdminDashboard}
-            />
-            <PrivateRoute
+            <AdminRoute path={"/admin/endedPolls"} component={AdminDashboard} />
+            <AdminRoute
               path={"/admin/canceledPolls"}
               component={AdminDashboard}
             />
-            <PrivateRoute path={"/admin/newPoll"} component={NewPollPage} />
-            <PrivateRoute
-              path={"/admin/editPoll/:id"}
-              component={EditPollPage}
-            />
-            <PrivateRoute
+            <AdminRoute path={"/admin/newPoll"} component={NewPollPage} />
+            <AdminRoute path={"/admin/editPoll/:id"} component={EditPollPage} />
+            <AdminRoute
               path={"/admin/newCandidate"}
               component={NewCandidatePage}
             />
-            <PrivateRoute path={"/admin/poll/:pollId"} component={PollPage} />
+            <AdminRoute path={"/admin/poll/:pollId"} component={PollPage} />
             <Route path={"*"} component={NotFoundPage} />
           </Switch>
         </Router>

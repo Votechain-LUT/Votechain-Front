@@ -18,7 +18,7 @@ class Http {
   constructor() {
     this.http = rateLimit(
       axios.create({
-        baseURL: "https://votechain-core-api-k6hhi2ncka-ey.a.run.app",
+        baseURL: "http://localhost:8000",
       }),
       { maxRequests: 2, perMilliseconds: 1000 }
     );

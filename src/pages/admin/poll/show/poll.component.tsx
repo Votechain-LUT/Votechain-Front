@@ -97,7 +97,6 @@ const PollPage: React.FC<Props> = ({ location }) => {
             <thead>
               <tr>
                 <th>Kandydat</th>
-                <th>Liczba zdobytych głosów</th>
                 <th>Akcje</th>
               </tr>
             </thead>
@@ -107,7 +106,6 @@ const PollPage: React.FC<Props> = ({ location }) => {
                   return (
                     <tr key={key}>
                       <td>{candidate.name}</td>
-                      <td>0</td>
                       <td>
                         <div
                           role={"presentation"}

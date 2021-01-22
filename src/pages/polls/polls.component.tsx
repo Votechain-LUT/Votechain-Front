@@ -6,16 +6,33 @@ import { Link } from "react-router-dom";
 
 const PollsPage: React.FC = () => {
   const [polls, setPolls] = useState<Poll[]>([]);
+  const [pollType, setPollType] = useState("ongoing");
   useEffect(() => {
     const http = new Http();
     const fetchPolls = async () => {
-      const json = await http.getVoterPolls();
+      const json = await http.getVoterPolls(pollType);
       setPolls(json.data);
     };
     fetchPolls();
-  }, []);
+  }, [pollType]);
   return (
     <section className={"pollsPage"}>
+      <div className={"links"}>
+        <span
+          role={"presentation"}
+          onClick={() => setPollType("ongoing")}
+          className={`${pollType === "ongoing" ? "active" : ""}`}
+        >
+          Trwające głosowania
+        </span>
+        <span
+          role={"presentation"}
+          onClick={() => setPollType("ended")}
+          className={`${pollType === "ended" ? "active" : ""}`}
+        >
+          Zakończone głosowania
+        </span>
+      </div>
       <div className={"tableWrapper"}>
         {polls.length > 0 ? (
           <table>
@@ -25,25 +42,31 @@ const PollsPage: React.FC = () => {
                 <th>Data rozpoczęcia głosowania</th>
                 <th>Data zakończenia głosowania</th>
                 <th>Liczba kandydatów</th>
+                <th>Akcje</th>
               </tr>
             </thead>
             <tbody>
               {polls.map((poll) => {
                 return (
                   <tr key={poll.id}>
-                    <td>
-                      <Link
-                        to={{
-                          pathname: `/polls/${poll.id}`,
-                          state: { poll: poll },
-                        }}
-                      >
-                        {poll.title}
-                      </Link>
-                    </td>
+                    <td>{poll.title}</td>
                     <td>{poll.start}</td>
                     <td>{poll.end}</td>
                     <td>{poll.candidates?.length}</td>
+                    <td>
+                      {pollType === "ended" ? (
+                        "Zobacz wyniki"
+                      ) : (
+                        <Link
+                          to={{
+                            pathname: `/polls/${poll.id}`,
+                            state: { poll: poll },
+                          }}
+                        >
+                          Oddaj głos
+                        </Link>
+                      )}
+                    </td>
                   </tr>
                 );
               })}

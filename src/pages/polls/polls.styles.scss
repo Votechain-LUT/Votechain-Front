@@ -62,4 +62,15 @@
       }
     }
   }
+  .links{
+    span{
+      cursor:pointer;
+      &.active{
+        font-weight:700;
+      }
+    }
+    span:last-child{
+      margin-left:20px;
+    }
+  }
 }

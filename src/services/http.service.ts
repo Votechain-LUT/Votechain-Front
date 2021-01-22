@@ -82,9 +82,9 @@ class Http {
     return this.http.get("/admin/user");
   }
 
-  public getVoterPolls(): Promise<AxiosResponse<Poll[]>> {
+  public getVoterPolls(type: string): Promise<AxiosResponse<Poll[]>> {
     this.setHeaders();
-    return this.http.get("/voter/poll");
+    return this.http.get(`/voter/poll?${type}=true`);
   }
 
   public getOngoingPolls(): Promise<AxiosResponse<Poll[]>> {
@@ -127,6 +127,16 @@ class Http {
       `/voter/poll/${pollId}/candidate/${candidateId}`,
       token
     );
+  }
+
+  public verifyVote(pollId: number): Promise<AxiosResponse<string>> {
+    this.setHeaders();
+    return this.http.post(`/voter/poll/${pollId}verify`);
+  }
+
+  public getVoteResults(pollId: number | undefined) {
+    this.setHeaders();
+    return this.http.get(`/voter/poll/${pollId}/results`);
   }
 
   public updatePoll(

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./polls.styles.scss";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { Poll } from "../../types";
 import FormInput from "../../components/formInput/formInput.component";
 import Button from "../../components/button/button.component";
@@ -19,6 +19,7 @@ type SelectOption = {
 
 const UserPollPage = () => {
   const params = useLocation<LocationType>();
+  const history = useHistory();
   const { poll } = params.state;
   const [voteToken, setVoteToken] = useState("");
   const [verifyToken, setVerifyToken] = useState("");
@@ -37,6 +38,12 @@ const UserPollPage = () => {
       });
     }
     setCandidates(options);
+    // const http = new Http();
+    // const test = async () => {
+    //   const json = await http.getVoteResults(poll.id);
+    //   console.log(json);
+    // };
+    // test();
   }, []);
 
   const vote = async () => {
@@ -45,11 +52,16 @@ const UserPollPage = () => {
       toast.error("Brak tokenu do głosowania");
       return;
     }
+    if (!candidate) {
+      toast.error("Nie wybrano kandydata");
+      return;
+    }
     try {
       //eslint-disable-next-line
       // @ts-ignore
       await http.vote(poll.id, candidate.value, { token: voteToken });
       toast.success("Głos został oddany pomyślnie");
+      history.push("/polls");
     } catch (err) {
       toast.error("Coś poszło nie tak... :( " + err.response.data.detail);
     }
@@ -102,7 +114,6 @@ const UserPollPage = () => {
         <div className={"buttonSection"}>
           <Button handleClick={vote} value={"Oddaj głos"} />
           <Button value={"Zweryfikuj głos"} />
-          <Button value={"Odśwież wyniki"} />
         </div>
       </div>
     </section>

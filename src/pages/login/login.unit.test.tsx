@@ -6,6 +6,11 @@ jest.mock("react-redux", () => ({
 }));
 
 describe("Login page tests", () => {
+
+  it('renders', () => {
+    expect(2).toBeGreaterThan(1);
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });

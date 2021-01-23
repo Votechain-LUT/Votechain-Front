@@ -1,7 +1,10 @@
-language: generic
 sudo: required
 
 services: docker
+
+cache:
+  directories:
+    - node_modules
 
 before_install:
   - docker build -t votechain/front -f Dockerfile.dev .

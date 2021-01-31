@@ -1,7 +1,7 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'gcr.io/front-votechain/front-votechain-00001-zux', '.' ]
+    args: [ 'build', '-t', 'gcr.io/front-votechain/front-votechain', '.' ]
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'push', 'gcr.io/front-votechain/front-votechain-00001-zux']
+    args: [ 'push', 'gcr.io/front-votechain/front-votechain']
   - name: "gcr.io/cloud-builders/gcloud"
-    args: ['run', 'deploy', 'front-votechain-00001-zux', '--image', 'gcr.io/front-votechain/front-votechain-00001-zux', '--region', 'europe-west4', '--platform', 'managed', '--allow-unauthenticated']
+    args: ['run', 'deploy', 'front-votechain', '--image', 'gcr.io/front-votechain/front-votechain', '--region', 'europe-west4', '--platform', 'managed', '--allow-unauthenticated']

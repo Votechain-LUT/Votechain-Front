@@ -12,5 +12,5 @@ describe("Form input", () => {
     // const input = body.getByPlaceholderText("testPlaceholder");
     // fireEvent.change(input, event);
     // expect(onChangeMock).toBeCalledWith("test123");
-  })
+  });
 });

@@ -67,8 +67,9 @@ export const fetchToken = (requestBody: LoginRequest): AppThunk => async (
     );
     toast.success("Logowanie przebiegło pomyślnie");
   } catch (err) {
-    toast.error("Coś poszło nie tak :( " + err.response.data.detail);
-    dispatch(getTokenFailure(err));
+    if (!err.response) {
+      toast.error("Upewnij się że jesteś połączony z siecią");
+    }
   }
 };
 

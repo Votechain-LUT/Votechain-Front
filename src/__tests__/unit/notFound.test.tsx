@@ -7,12 +7,18 @@ let body: RenderResult;
 
 describe("Not found page", () => {
   beforeEach(() => {
-    body = render(<Router><NotFoundPage/></Router>)
+    body = render(
+      <Router>
+        <NotFoundPage />
+      </Router>
+    );
   });
   it("show not found message", () => {
     expect(body.getByText("404 :(")).toBeInTheDocument();
   });
   it("should have link to homepage", () => {
-    expect(body.getByText("Wróć do strony głównej").closest('a')).toHaveAttribute('href', "/");
-  })
+    expect(
+      body.getByText("Wróć do strony głównej").closest("a")
+    ).toHaveAttribute("href", "/");
+  });
 });

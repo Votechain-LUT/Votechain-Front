@@ -42,6 +42,9 @@ const NewCandidatePage: React.FC = () => {
         history.push("/admin/futurePolls");
       }
     } catch (err) {
+      if (!err.response) {
+        toast.error("Upewnij się że jesteś połączony z siecią");
+      }
       toast.error("Coś poszło nie tak :( " + err.message);
     }
   };

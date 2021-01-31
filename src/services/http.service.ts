@@ -20,7 +20,7 @@ class Http {
   constructor() {
     this.http = rateLimit(
       axios.create({
-        baseURL: "http://localhost:8000",
+        baseURL: process.env.REACT_APP_API_URL || "http://localhost:8000",
       }),
       { maxRequests: 2, perMilliseconds: 1000 }
     );

@@ -20,7 +20,7 @@ class Http {
   constructor() {
     this.http = rateLimit(
       axios.create({
-        baseURL: process.env.REACT_APP_API_URL || "http://localhost:8000",
+        baseURL: "https://api-c2ldbi3axa-ez.a.run.app",
       }),
       { maxRequests: 2, perMilliseconds: 1000 }
     );
@@ -33,7 +33,7 @@ class Http {
             store.dispatch(refreshToken());
           } else {
             window.location.href =
-              process.env.REACT_APP_APP_URL || "http://localhost:3000";
+              "https://front-votechain-cpzh2mvr6q-ez.a.run.app";
           }
         }
         return Promise.reject(error);

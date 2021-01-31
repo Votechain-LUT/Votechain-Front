@@ -67,6 +67,10 @@ const PollPage: React.FC<Props> = ({ location }) => {
         });
       }
     } catch (err) {
+      if (!err.response) {
+        toast.error("Upewnij się że jesteś połączony z siecią");
+        return;
+      }
       toast.error("Coś poszło nie tak :( " + err.response.data.detail);
     }
   };
@@ -78,6 +82,10 @@ const PollPage: React.FC<Props> = ({ location }) => {
       toast.success("Głosowanie zostało rozpoczęte");
       history.push("/admin/onGoingPolls");
     } catch (err) {
+      if (!err.response) {
+        toast.error("Upewnij się że jesteś połączony z siecią");
+        return;
+      }
       toast.error("Coś poszło nie tak :( " + err.response.detail);
     }
   };

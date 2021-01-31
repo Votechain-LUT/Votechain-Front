@@ -100,6 +100,10 @@ const PollForm: React.FC = () => {
       }
       history.push("/admin/onGoingPolls");
     } catch (err) {
+      if (!err.response) {
+        toast.error("Upewnij się że jesteś połączony z siecią");
+        return;
+      }
       toast.error("Coś poszło nie tak :( " + err.response.data.detail);
     }
   };

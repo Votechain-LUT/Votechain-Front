@@ -4,6 +4,7 @@ WORKDIR /app
 COPY . ./
 RUN yarn
 RUN yarn build
+RUN rm -rf src/
 
 # server environment
 FROM nginx:alpine

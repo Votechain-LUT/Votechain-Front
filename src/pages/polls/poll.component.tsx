@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router";
 import { Poll } from "../../types";
 import FormInput from "../../components/formInput/formInput.component";
 import Button from "../../components/button/button.component";
-import Select, { ValueType } from "react-select";
+import Select, { ActionMeta, ValueType } from "react-select";
 import Http from "../../services/http.service";
 import { toast } from "react-toastify";
 
@@ -24,9 +24,9 @@ const UserPollPage = () => {
   const [voteToken, setVoteToken] = useState("");
   const [verifyToken, setVerifyToken] = useState("");
   const [candidates, setCandidates] = useState<SelectOption[]>([]);
-  const [candidate, selectCandidate] = useState<
-    ValueType<SelectOption, true>
-  >();
+  const [candidate, selectCandidate] = useState<ValueType<SelectOption, true>>(
+    []
+  );
   useEffect(() => {
     const options: React.SetStateAction<SelectOption[]> = [];
     if (poll.candidates && poll.candidates.length > 0) {
@@ -67,8 +67,15 @@ const UserPollPage = () => {
     }
   };
 
-  const onChange = (candidate: ValueType<SelectOption, true>) => {
-    selectCandidate(candidate);
+  const onChange = (
+    candidate: SelectOption | null,
+    e: ActionMeta<SelectOption>
+  ) => {
+    if (candidate) {
+      //eslint-disable-next-line
+      //@ts-ignore
+      selectCandidate(candidate);
+    }
   };
 
   return (
@@ -90,7 +97,7 @@ const UserPollPage = () => {
           <span className={"bold"}>Kandydaci: </span>
           {poll.candidates && (
             <Select
-              value={candidate}
+              value={candidate[0]}
               placeholder={"Wybierz kandydata"}
               onChange={onChange}
               options={candidates}

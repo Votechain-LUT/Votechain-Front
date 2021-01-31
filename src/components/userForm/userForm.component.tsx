@@ -37,6 +37,10 @@ const UserForm: React.FC = () => {
       await http.createUser(requestBody);
       history.push("/admin/users");
     } catch (err) {
+      if (!err.response) {
+        toast.error("Upewnij się że jesteś połączony z siecią");
+        return;
+      }
       toast.error("Coś poszło nie tak :( " + err.response.data.username);
     }
   };

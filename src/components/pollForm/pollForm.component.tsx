@@ -78,8 +78,8 @@ const PollForm: React.FC = () => {
     const http = new Http();
     const requestBody = {
       title: title,
-      start: "16-02-2021 20:11:19",
-      end: "16-02-2021 20:14:19",
+      start: formatDate(startDate),
+      end: formatDate(endDate),
       isActive: true,
     };
     const userRequestBody: GenerateTokensRequest = { users: [] };

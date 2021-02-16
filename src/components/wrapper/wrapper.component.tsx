@@ -21,6 +21,7 @@ import UserListPage from "../../pages/admin/user/index/userList.component";
 import ChangePasswordPage from "../../pages/admin/user/changePassword/changePassword.component";
 import UserPollPage from "../../pages/polls/poll.component";
 import AdminRoute from "../adminRoute/adminRoute.component";
+import PollResultPage from "../../pages/polls/pollResult.component";
 registerLocale("pl", pl);
 
 export const Wrapper: React.FC = () => {
@@ -49,8 +50,11 @@ export const Wrapper: React.FC = () => {
               path={"/changePassword"}
               component={ChangePasswordPage}
             />
-            <PrivateRoute path={"/polls/:id"} component={UserPollPage} />
-
+            <PrivateRoute exact path={"/polls/:id"} component={UserPollPage} />
+            <PrivateRoute
+              path={"/polls/:id/results"}
+              component={PollResultPage}
+            />
             <AdminRoute path={"/admin/newUser"} component={NewUserPage} />
             <AdminRoute path={"/admin/users"} component={UserListPage} />
             <AdminRoute

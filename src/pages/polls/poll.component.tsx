@@ -22,7 +22,6 @@ const UserPollPage = () => {
   const history = useHistory();
   const { poll } = params.state;
   const [voteToken, setVoteToken] = useState("");
-  const [verifyToken, setVerifyToken] = useState("");
   const [candidates, setCandidates] = useState<SelectOption[]>([]);
   const [candidate, selectCandidate] = useState<ValueType<SelectOption, true>>(
     []
@@ -111,16 +110,8 @@ const UserPollPage = () => {
           placeholder={"Token do głosowania"}
           onChange={(e) => setVoteToken(e.target.value)}
         />
-        <FormInput
-          type={"text"}
-          value={verifyToken}
-          label={"Token do weryfikacji głosu"}
-          placeholder={"Token do weryfikacji głosu"}
-          onChange={(e) => setVerifyToken(e.target.value)}
-        />
         <div className={"buttonSection"}>
           <Button handleClick={vote} value={"Oddaj głos"} />
-          <Button value={"Zweryfikuj głos"} />
         </div>
       </div>
     </section>

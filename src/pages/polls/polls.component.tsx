@@ -55,7 +55,14 @@ const PollsPage: React.FC = () => {
                     <td>{poll.candidates?.length}</td>
                     <td>
                       {pollType === "ended" ? (
-                        "Zobacz wyniki"
+                        <Link
+                          to={{
+                            pathname: `polls/${poll.id}/results`,
+                            state: { poll: poll },
+                          }}
+                        >
+                          Wyniki/weryfikacja
+                        </Link>
                       ) : (
                         <Link
                           to={{

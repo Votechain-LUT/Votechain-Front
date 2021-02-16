@@ -78,8 +78,8 @@ const PollForm: React.FC = () => {
     const http = new Http();
     const requestBody = {
       title: title,
-      start: formatDate(startDate),
-      end: formatDate(endDate),
+      start: "16-02-2021 20:11:19",
+      end: "16-02-2021 20:14:19",
       isActive: true,
     };
     const userRequestBody: GenerateTokensRequest = { users: [] };
@@ -96,7 +96,7 @@ const PollForm: React.FC = () => {
         toast.success("Udało się zaktualizować głosowanie");
       } else {
         await http.createPoll(requestBody);
-        toast.success("Udało się utworzyć głosowania");
+        toast.success("Udało się utworzyć głosowanie");
       }
       history.push("/admin/onGoingPolls");
     } catch (err) {

@@ -2,7 +2,6 @@ import axios from "axios";
 import rateLimit from "axios-rate-limit";
 import { AxiosResponse } from "axios";
 import store from "../redux/store";
-import { toast } from "react-toastify";
 
 import {
   LoginRequest,
@@ -131,9 +130,12 @@ class Http {
     );
   }
 
-  public verifyVote(pollId: number): Promise<AxiosResponse<string>> {
+  public verifyVote(
+    pollId: number | undefined,
+    token: { token: string }
+  ): Promise<AxiosResponse<string>> {
     this.setHeaders();
-    return this.http.post(`/voter/poll/${pollId}verify`);
+    return this.http.post(`/voter/poll/${pollId}/verify`, token);
   }
 
   public getVoteResults(pollId: number | undefined) {

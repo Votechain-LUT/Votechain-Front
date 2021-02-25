@@ -17,6 +17,7 @@ const App: React.FC = () => {
   const history = useHistory();
   const [sidebarField, setSidebarField] = useState("");
   const isAdminRoute = location.pathname.includes("admin");
+  const isLoginRoute = location.pathname === "/";
   const { showSidebar, token } = useSelector((state: RootState) => {
     return {
       showSidebar: state.app.showSidebar,
@@ -28,17 +29,18 @@ const App: React.FC = () => {
     const sidebarField = location.pathname.split("/")[2];
     setSidebarField(sidebarField);
   }, [location]);
-
   return (
     <div className={"appWrapper"}>
       <div className={"topSection"}>
-        <img
-          onClick={() => dispatch(toggleSidebar())}
-          className={"sidebarIcon"}
-          role={"presentation"}
-          src={menuLogo}
-          alt={"menuLogo"}
-        />
+        {!isLoginRoute && (
+          <img
+            onClick={() => dispatch(toggleSidebar())}
+            className={"sidebarIcon"}
+            role={"presentation"}
+            src={menuLogo}
+            alt={"menuLogo"}
+          />
+        )}
         {token && (
           <div>
             {!isAdminRoute && (

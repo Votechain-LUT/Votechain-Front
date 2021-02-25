@@ -31,7 +31,7 @@ const CandidateForm: React.FC<Props> = ({
           onChange={onChange}
         />
         <FormSelect polls={polls} selectPoll={selectPoll} />
-        <Button value={"Dodaj kandydata"} />
+        {polls.length > 0 && <Button value={"Dodaj kandydata"} />}
       </form>
     </div>
   );

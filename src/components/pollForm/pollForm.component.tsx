@@ -20,7 +20,7 @@ type MultiSelectOption = {
 };
 
 const PollForm: React.FC = () => {
-  const tomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  const tomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1.5);
   const history = useHistory();
   const location = useLocation();
   const params = useParams<ParamType>();
